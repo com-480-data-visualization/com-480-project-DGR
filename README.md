@@ -2,9 +2,9 @@
 
 | Student's name | SCIPER |
 | -------------- | ------ |
-| | |
-| | |
-| | |
+| Beatrice Grassano | 370780 |
+| Lorenzo Drudi | 367980 |
+| Emanuele Rimoldi | 377013 |
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
