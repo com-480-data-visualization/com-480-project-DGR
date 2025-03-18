@@ -33,3 +33,4 @@ MANIFEST
 # Data
 data/**
 !data/download_eea_air_quality_data.py
+!data/scraper_immobiliare_it.py

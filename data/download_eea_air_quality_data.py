@@ -20,6 +20,8 @@ class DataCategory:
     VERIFIED = "Verified"
     UNVERIFIED = "Unverified"
     HISTORICAL = "Historical"
+    
+DATA_FOLDER = "./air_quality/"
 
 if __name__ == "__main__":
     client = airbase.AirbaseClient()
@@ -29,5 +31,5 @@ if __name__ == "__main__":
     # Testing with only PM2.5 data (just a matter of time and space)
     r = client.request(DataCategory.VERIFIED, "IT", "ES", "PL", "FI", poll=["PM2.5"])
     
-    r.download(dir="./", skip_existing=True)
-    client.download_metadata("metadata.csv")
+    r.download(dir=f"{DATA_FOLDER}", skip_existing=True)
+    client.download_metadata(f"{DATA_FOLDER}metadata.csv")
