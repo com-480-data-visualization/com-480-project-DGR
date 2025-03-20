@@ -17,4 +17,4 @@ python download_eea_air_quality_data.py
 # 3. DATA ANALYSIS
 
 Two notebooks:
-- `eea_air_quality_data_analysis`: air quality data
+- `eea_air_quality_eda`: air quality data
