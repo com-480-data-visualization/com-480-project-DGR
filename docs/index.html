@@ -2,7 +2,7 @@
 
 <html>
 	<head>
-		<title>dgr-dataviz</title>
+		<title>SmogSense</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -12,9 +12,8 @@
 	</head>
 	<body class="is-preload">
 
-			<!-- Header -->
 			<header id="header">
-				<a id="logo" class="logo" href="#">DGR</a>
+				<a id="logo" class="logo" href="#">SmogSense</a>
 				<nav>
 					<ul>
 						<li><a href="#home">Home</a></li>
@@ -25,61 +24,105 @@
 				</nav>
 			</header>
 
-			<!-- Home -->
 			<section id="home" class="main style1 dark fullscreen" tabindex="">
 				<div class="content">
 					<header>
-						<h2>INSERT A TITLE HERE</h2>
+						<h2>SmogSense – Understand the Unseen</h2>
 					</header>
-					<p id="anim"></p>
-				</div>
+					<p>Welcome to SmogSense - your interactive guide to understanding the unseen air pollution in Europe.</p>
+					<p>Our website aims to offer an engaging exploration of air quality across Europe, showcasing the evolution of pollution levels over the past two decades and projecting future trends based on real-time data.</p>
+					<p>Through intuitive visualizations, we empower you to understand the impact of air pollution and make informed decisions about the environment.</p>
+					<p>Whether you're a scientist, policymaker, or a concerned citizen, SmogSense brings you the latest insights into air quality across Europe.</p>					</div>
 			</section>
 
-			<!-- Main Section -->
 			<section id="intro" class="main style2 right dark fullscreen">
 				<div class="content box style2">
 					<header>
-						<h2>Main Section Title</h2>
+						<h2>Air Quality at a Glance</h2>
+						<h2>Visualizing pollution across Europe</h2>
 					</header>
 				</div>
 				<a href="#curiosities" class="button style2 down anchored">Next</a>
 			</section>
 
 			<section class="gray main style3">
-				<div class="content">
-					section type 2
+				<div class="content text-center">
+					<p>As you begin your journey with SmogSense, the first thing you'll encounter is our dynamic heatmap of Europe.</p>
+					<p>This tool gives you an immediate snapshot of air quality across the continent, showing where pollution is at its highest and how it changes over time.</p>
+					<p>Whether you're looking at the past 24 hours or the last year, the heatmap helps you grasp how pollution spreads, making it easier to spot trends and take action.</p>
+					<p>It's not just a map, it's your gateway to understanding air quality at a glance.</p>
 				</div>
+				<img src="assets/plots/map.png" alt="Europe Heatmap with AQI Values" width="600" height="400">
+				<!-- <div class="plot">
+					<iframe id="avg_game_length" src="../preprocess/heatmap.html" width="1000" height="1200" scrolling="no"></iframe>
+				</div> -->
 			</section>
 
-			<section class="main style3 primary">
-				<div class="content">
-					section type 1
-				</div>
-			</section>
-
-			<!-- Curiosities -->
 			<section id="questions" class="main style2 left dark fullscreen">
 				<div class="content box style2">
 					<header>
-						<h2>Curiosities Section Title</h2>
+						<h2>What's Behind the Numbers?</h2>
+						<h2>Dive deeper into pollution at the country level</h2>
 					</header>
 				</div>
 				<a href="#datastory" class="button style2 down anchored">Next</a>
 			</section>
 
 			<section class="gray main style3">
-				<div class="content">
-					section type 2
+				<div class="content text-center">
+					<p>Have you ever wondered how air pollution impacts individual countries? Which country is the most polluted?</p>
+					<p>Explore the interactive map and choose the country you want to investigate. Once selected, the journey continues with a detailed view: on the left, a map showing the selected country, and on the right, interactive graphs that dive deep into key pollutants like PM2.5, CO, and many others.</p>
+					<p>Analyze how pollution is distributed and evolves over time, and understand its direct impact on health. Ready to explore?</p>
 				</div>
+				<img src="assets/plots/map.png" alt="Europe Heatmap with AQI Values" width="600" height="400">
 			</section>
 
-			<section class="main style3 primary">
-				<div class="content">
-					section type 1
+			<section id="intro" class="main style2 right dark fullscreen">
+				<div class="content box style2">
+					<header>
+						<h2>Pollutants at the Core</h2>
+						<h2>Unveiling the biggest pollutants and their impact</h2>
+					</header>
 				</div>
+				<a href="#curiosities" class="button style2 down anchored">Next</a>
 			</section>
 
-			<!-- Footer -->
+			<section class="gray main style3">
+				<div class="content text-center">
+					<p> What's next? Now, let's zoom in even further.</p>
+					<p>Want to know which pollutants are making the biggest impact? This section lets you focus on specific pollutants and shows you which countries are most affected.</p>
+					<p>You'll find a horizontal bar chart highlighting the top five countries with the highest average pollutant concentrations.</p>
+					<p>Curious about the trends? A time-lapse animation lets you explore how these countries have evolved over the past decade.</p>
+					<p>Furthermore, a flashcard provides key insights about the selected pollutant: its name, acceptable concentration range, associated health risks, and emission sources.</p>
+					<p>This section takes raw data and transforms it into insights that matter—connecting pollution levels to real-world health impacts and making the information both actionable and eye-opening.</p>					
+				</div>
+				<img src="assets/plots/map.png" alt="Europe Heatmap with AQI Values" width="600" height="400">
+				<!-- <div class="plot">
+					<iframe id="avg_game_length" src="../preprocess/heatmap.html" width="1000" height="1200" scrolling="no"></iframe>
+				</div> -->
+			</section>
+
+			<section id="intro" class="main style2 right dark fullscreen">
+				<div class="content box style2">
+					<header>
+						<h2>Beyond the Data</h2>
+						<h2>How electric vehicles are shaping our air quality future?</h2>
+					</header>
+				</div>
+				<a href="#curiosities" class="button style2 down anchored">Next</a>
+			</section>
+
+			<section id="curiosities" class="gray main style3">
+				<div class="content text-center">
+					<p>We've now reached the end of our journey through the discovery of air quality in Europe... but the story doesn't end here.</p>
+					<p>How can we use what we've learned so far?</p>
+					<p>Staying within the theme of sustainability, we invite you to reflect on how the rise of electric vehicles has impacted air quality.</p>
+					<p>The Curiosity Section takes you further, exploring engaging visual stories like the influence of EV adoption on pollution levels.</p>
+					<p>By showing the correlation between EV growth and cleaner air, we offer a thought-provoking perspective on how our choices, individually and collectively, can shape the future of our environment.</p>									
+				</div>
+				<img src="assets/plots/EV.png" alt="Line graph showing the relation between EV purchase and air quality" width="600" height="400">
+			</section>
+
 			<footer id="footer">
 					<section id="contact-section" class="features contact"> 
 						<div class="contact-container"> 
@@ -138,6 +181,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/typing.js"></script>
 
 			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
