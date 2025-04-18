@@ -1,6 +1,7 @@
 .main img {
 	margin: 20px auto;
 	display: block; /* centers the image horizontally */
+	max-width: 100%;
 }
 
 .main.style3 {
