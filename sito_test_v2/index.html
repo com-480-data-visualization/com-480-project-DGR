@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>European Air Quality Trends</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-smog" aria-hidden="true"></i> European Air Quality Trends</h1>
+            <div class="controls-container">
+                <div class="control-group">
+                    <label for="pollutant-select">Select Pollutant:</label>
+                    <div class="select-wrapper">
+                        <select id="pollutant-select" aria-label="Select pollutant type"></select>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 10l5 5 5-5z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main id="overview-visualization">
+            <div id="visualization-area">
+                <div id="bar-chart-container">
+                    <div id="chart-loader" class="chart-overlay" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Loading...
+                    </div>
+                    <div id="bar-chart" role="graphics-document" aria-label="Bar chart showing top 5 EU countries by pollutant concentration">
+                        </div>
+                </div>
+
+                 <div class="timelapse-controls">
+                    <button id="play-pause-button" aria-label="Pause timelapse">
+                        <i class="fas fa-pause" aria-hidden="true"></i>
+                    </button>
+                    <span class="control-label">Year:</span>
+                    <span id="current-year-display" aria-live="polite">2013</span>
+                </div>
+            </div>
+
+            <div id="pollutant-info" class="flashcard" role="region" aria-live="polite">
+                 <h2><i class="fas fa-info-circle" aria-hidden="true"></i> Pollutant Details</h2>
+                 <p><span class="label"><i class="fas fa-tag" aria-hidden="true"></i> Name:</span> <span id="pollutant-name">N/A</span></p>
+                 <p><span class="label"><i class="fas fa-ruler-combined" aria-hidden="true"></i> Guideline Limit (WHO):</span> <span id="acceptable-range">N/A</span></p>
+                 <p><span class="label"><i class="fas fa-lungs-virus" aria-hidden="true"></i> Potential Health Impacts:</span> <span id="health-risks">N/A</span></p>
+                 <p><span class="label"><i class="fas fa-industry" aria-hidden="true"></i> Main Emission Sources:</span> <span id="emission-sources">N/A</span></p>
+            </div>
+        </main>
+
+        <hr class="section-divider">
+
+        <section id="country-view">
+             <h2><i class="fas fa-globe-europe"></i> Country Specific View</h2>
+             <div class="controls-container country-controls">
+                <div class="control-group">
+                    <label for="country-select">Select Country:</label>
+                    <div class="select-wrapper">
+                        <select id="country-select" aria-label="Select European country"></select>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 10l5 5 5-5z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div id="country-visualization-content" class="country-details-container">
+                <div id="country-map-section">
+                    <h3><i class="fas fa-map-marked-alt"></i> Pollution Map: <span id="selected-country-name-map">No country selected</span></h3>
+                    <div id="country-map" aria-label="Map showing pollution levels across cities">
+                         <p class="placeholder-text">Map loading...</p>
+                    </div>
+                </div>
+
+                <div id="country-stats-section">
+                     <h3><i class="fas fa-chart-bar"></i> Descriptive Statistics: <span id="selected-country-name-stats">No country selected</span></h3>
+
+                    <div class="stats-chart-container">
+                        <h4><i class="fas fa-bars"></i> Normalized Pollutant Distribution (Z-Score)</h4>
+                        <div id="pollutant-distribution-chart" role="graphics-document" aria-label="Bar chart showing normalized distribution of pollutants">
+                            <p class="placeholder-text">Statistics loading...</p>
+                        </div>
+                        <p class="dominant-pollutant-info">Dominant Pollutant (highest Z-Score): <strong id="dominant-pollutant">N/A</strong></p>
+                    </div>
+
+                    <div class="stats-chart-container">
+                        <h4><i class="fas fa-chart-line"></i> Pollutant Evolution (Top 3)</h4>
+                        <div id="pollutant-evolution-chart" role="graphics-document" aria-label="Line graph showing evolution of top 3 pollutants">
+                             <p class="placeholder-text">Statistics loading...</p>
+                        </div>
+                        <div id="evolution-click-info" class="chart-click-info" aria-live="polite">
+                            Click on a point to see details.
+                        </div>
+                    </div>
+                </div>
+            </div> </section>
+
+        <footer>
+            <p>&copy; 2025 Air Quality Data Visualization | Dummy Data</p>
+        </footer>
+    </div>
+
+    <div class="tooltip" style="opacity: 0;"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
