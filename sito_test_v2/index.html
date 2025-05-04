@@ -21,9 +21,9 @@
             <h1><i class="fas fa-smog" aria-hidden="true"></i> European Air Quality Trends</h1>
             <div class="controls-container">
                 <div class="control-group">
-                    <label for="pollutant-select">Select Pollutant:</label>
+                    <label for="pollutant-select">Select Pollutant (Overview):</label>
                     <div class="select-wrapper">
-                        <select id="pollutant-select" aria-label="Select pollutant type"></select>
+                        <select id="pollutant-select" aria-label="Select pollutant type for overview charts"></select>
                         <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 10l5 5 5-5z" />
                         </svg>
                     </div>
@@ -45,8 +45,12 @@
                     <button id="play-pause-button" aria-label="Pause timelapse">
                         <i class="fas fa-pause" aria-hidden="true"></i>
                     </button>
-                    <span class="control-label">Year:</span>
-                    <span id="current-year-display" aria-live="polite">2013</span>
+                    <div class="year-selection-group">
+                        <label for="year-slider" class="control-label sr-only">Select Year:</label>
+                        <input type="range" id="year-slider" name="year-slider" min="2013" max="2024" step="1" value="2013" aria-labelledby="current-year-label">
+                         <span id="current-year-label" class="control-label">Year: <span id="year-slider-value" aria-live="polite">2013</span></span>
+                        <span id="current-year-display" class="sr-only" aria-live="polite">2013</span>
+                    </div>
                 </div>
             </div>
 
@@ -85,7 +89,7 @@
                 <div id="country-stats-section">
                      <h3><i class="fas fa-chart-bar"></i> Descriptive Statistics: <span id="selected-country-name-stats">No country selected</span></h3>
 
-                    <div class="stats-chart-container">
+                     <div class="stats-chart-container">
                         <h4><i class="fas fa-bars"></i> Normalized Pollutant Distribution (Z-Score)</h4>
                         <div id="pollutant-distribution-chart" role="graphics-document" aria-label="Bar chart showing normalized distribution of pollutants">
                             <p class="placeholder-text">Statistics loading...</p>
@@ -94,16 +98,36 @@
                     </div>
 
                     <div class="stats-chart-container">
-                        <h4><i class="fas fa-chart-line"></i> Pollutant Evolution (Top 3)</h4>
-                        <div id="pollutant-evolution-chart" role="graphics-document" aria-label="Line graph showing evolution of top 3 pollutants">
-                             <p class="placeholder-text">Statistics loading...</p>
+                        <h4><i class="fas fa-chart-line"></i> Pollutant Evolution</h4>
+                        <div id="pollutant-checkbox-container" class="pollutant-checkboxes" role="group" aria-labelledby="pollutant-checkbox-label">
+                             <span id="pollutant-checkbox-label" class="sr-only">Select pollutants for evolution chart:</span>
+                             <p class="placeholder-text" style="margin: 5px 0; font-size: 0.85em;">Loading pollutant options...</p>
+                        </div>
+                        <div id="pollutant-evolution-chart" role="graphics-document" aria-label="Line graph showing evolution of selected pollutants">
+                             <p class="placeholder-text">Select pollutants to view evolution...</p>
                         </div>
                         <div id="evolution-click-info" class="chart-click-info" aria-live="polite">
                             Click on a point to see details.
                         </div>
                     </div>
+
+                     <div class="stats-chart-container">
+                         <h4><i class="fas fa-city"></i> City Comparison (<span id="city-comparison-pollutant">N/A</span>)</h4>
+                          <div class="control-group city-chart-controls">
+                            <label for="city-pollutant-select" class="sr-only">Pollutant for City Comparison:</label>
+                            <div class="select-wrapper small-select">
+                                <select id="city-pollutant-select" aria-label="Select pollutant for city comparison chart"></select>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 10l5 5 5-5z" /> </svg>
+                            </div>
+                        </div>
+                        <div id="city-comparison-chart" role="graphics-document" aria-label="Lollipop chart comparing cities within the selected country">
+                             <p class="placeholder-text">Select a country and pollutant...</p>
+                         </div>
+                     </div>
+
                 </div>
-            </div> </section>
+            </div>
+        </section>
 
         <footer>
             <p>&copy; 2025 Air Quality Data Visualization | Dummy Data</p>
