@@ -128,14 +128,44 @@
                 </div>
             </div>
         </section>
+    </section> <hr class="section-divider">
 
-        <footer>
-            <p>&copy; 2025 Air Quality Data Visualization | Dummy Data</p>
-        </footer>
-    </div>
+    <section id="ev-air-quality-correlation">
+        <h2><i class="fas fa-leaf" aria-hidden="true"></i> EV Purchases & Air Quality Correlation</h2>
+        <div class="controls-container ev-controls">
+            <div class="control-group">
+                <label for="ev-country-select-1">Select Country 1:</label>
+                <div class="select-wrapper">
+                    <select id="ev-country-select-1" aria-label="Select first country for EV and air quality comparison"></select>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 10l5 5 5-5z" />
+                    </svg>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="ev-country-select-2">Select Country 2 (Optional):</label>
+                <div class="select-wrapper">
+                    <select id="ev-country-select-2" aria-label="Select second country for EV and air quality comparison (optional)"></select>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 10l5 5 5-5z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
 
-    <div class="tooltip" style="opacity: 0;"></div>
+        <div id="ev-air-quality-chart-container">
+            <div id="ev-air-quality-chart" role="graphics-document" aria-label="Line graph showing EV purchases and air quality correlation">
+                <p class="placeholder-text">Select a country to view data.</p>
+            </div>
+            <div id="ev-chart-tooltip" class="tooltip" style="opacity: 0;"></div>
+        </div>
+         <div id="ev-chart-legend" class="chart-legend">
+            </div>
+    </section>
 
-    <script src="script.js"></script>
+    <footer>
+        <p>&copy; 2025 Air Quality Data Visualization | Dummy Data</p>
+    </footer>
+</div>
+
+<div class="tooltip" style="opacity: 0;"></div> <script src="script.js"></script>
 </body>
 </html>
