@@ -134,9 +134,6 @@ function handleMouseOut(event, d) {
 }
 
 function updateChart(pollutantKey, data, year, updateSlider = true) {
-
-    console.log(`Updating chart for ${pollutantKey} in ${year}`);
-
     try { currentChartWidth = parseInt(d3.select("#bar-chart-container").style("width")) || currentChartWidth; } catch(e){}
     currentChartHeight = currentChartWidth * 0.65;
     overviewSVG.attr("viewBox", `0 0 ${currentChartWidth} ${currentChartHeight}`);
@@ -804,7 +801,7 @@ async function initializeDashboard() {
     cityPollutantSelect.property("value", DEFAULT_POLLUTANT);
     cityComparisonPollutantSpan.text(DEFAULT_POLLUTANT);
     setTimeout(() => { loadCountryData(DEFAULT_COUNTRY); }, 300);
-    initializeEVCorrelationSection();
+    //initializeEVCorrelationSection();
 
     pollutantSelect.on("change", async function() { 
         showLoader();
@@ -837,6 +834,7 @@ async function initializeDashboard() {
             cityComparisonPollutantSpan.text(selectedPollutant || 'N/A');
         } 
     });
+
     playPauseButton.on("click", togglePlayPause);
     yearSlider.on("input", function() { stopTimelapse(); const selectedYear = parseInt(d3.select(this).property("value")); if (selectedYear !== currentDisplayYear) { currentDisplayYear = selectedYear; currentYearIndex = years.indexOf(currentDisplayYear); const dataForYear = historicalDummyData[currentDisplayYear]?.[currentPollutant]; if (dataForYear) { updateChart(currentPollutant, dataForYear, currentDisplayYear, false); } else { console.warn(`No data for ${currentPollutant} in ${currentDisplayYear}`); updateChart(currentPollutant, [], currentDisplayYear, false); } } });
     countrySelect.on("change", function() { const selectedCountry = d3.select(this).property("value"); if (selectedCountry) { loadCountryData(selectedCountry); } });

@@ -8,6 +8,14 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/custom.css" />
+		<link rel="stylesheet" href="assets/css/visuals.css">
+		<script src="https://d3js.org/d3.v7.min.js"></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -86,14 +94,56 @@
 					<p>Explore the interactive map and choose the country you want to investigate. Once selected, the journey continues with a detailed view: on the left, a map showing the selected country, and on the right, interactive graphs that dive deep into key pollutants like PM2.5, CO, and many others.</p>
 					<p>Analyze how pollution is distributed and evolves over time, and understand its direct impact on health. Ready to explore?</p>
 
-					<p class="text-center"><strong>&lt;VISUALIZATIONS PROTOTYPE&gt;</strong></p>
-					<p class="text-center">
-						<strong>
-						  &lt;The sketch below will be replaced with an interactive map of the selected country, along with multiple plots — including spider, violin, bar, and line charts — to provide detailed insights into the country's pollutant profile&gt;
-						</strong>
-					</p>
+					<div class="visuals-container" style="margin: 30px 0;">
+						<header>
+							<h1><i class="fas fa-smog" aria-hidden="true"></i> European Air Quality Trends</h1>
+							<div class="controls-container">
+								<div class="control-group">
+									<label for="pollutant-select">Select Pollutant (Overview):</label>
+									<div class="select-wrapper">
+										<select id="pollutant-select" aria-label="Select pollutant type for overview charts"></select>
+										<svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 10l5 5 5-5z" />
+										</svg>
+									</div>
+								</div>
+							</div>
+						</header>
+				
+						<main id="overview-visualization">
+							<div id="visualization-area">
+								<div id="bar-chart-container">
+									<div id="chart-loader" class="chart-overlay" style="display: none;">
+										<i class="fas fa-spinner fa-spin"></i> Loading...
+									</div>
+									<div id="bar-chart" role="graphics-document" aria-label="Bar chart showing top 5 EU countries by pollutant concentration">
+										</div>
+								</div>
+				
+								 <div class="timelapse-controls">
+									<button id="play-pause-button" aria-label="Pause timelapse">
+										<i class="fas fa-pause" aria-hidden="true"></i>
+									</button>
+									<div class="year-selection-group">
+										<label for="year-slider" class="control-label sr-only">Select Year:</label>
+										<input type="range" id="year-slider" name="year-slider" min="2013" max="2024" step="1" value="2013" aria-labelledby="current-year-label">
+										 <span id="current-year-label" class="control-label">Year: <span id="year-slider-value" aria-live="polite">2013</span></span>
+										<span id="current-year-display" class="sr-only" aria-live="polite">2013</span>
+									</div>
+								</div>
+							</div>
+				
+							<div id="pollutant-info" class="flashcard" role="region" aria-live="polite">
+								 <h2><i class="fas fa-info-circle" aria-hidden="true"></i> Pollutant Details</h2>
+								 <p><span class="label"><i class="fas fa-tag" aria-hidden="true"></i> Name:</span> <span id="pollutant-name">N/A</span></p>
+								 <p><span class="label"><i class="fas fa-ruler-combined" aria-hidden="true"></i> Guideline Limit (WHO):</span> <span id="acceptable-range">N/A</span></p>
+								 <p><span class="label"><i class="fas fa-lungs-virus" aria-hidden="true"></i> Potential Health Impacts:</span> <span id="health-risks">N/A</span></p>
+								 <p><span class="label"><i class="fas fa-industry" aria-hidden="true"></i> Main Emission Sources:</span> <span id="emission-sources">N/A</span></p>
+							</div>
+						</main>
+					</div>
 				</div>
-				<img src="assets/plots/country_view.png" alt="Close-up view of the country" width="600" height="400">
+				
+
 			</section>
 
 			<section id="intro" class="main style2 right dark fullscreen">
@@ -115,19 +165,74 @@
 					<p>Furthermore, a flashcard provides key insights about the selected pollutant: its name, acceptable concentration range, associated health risks, and emission sources.</p>
 					<p>This section takes raw data and transforms it into insights that matter—connecting pollution levels to real-world health impacts and making the information both actionable and eye-opening.</p>	
 
-					<p class="text-center"><strong>&lt;VISUALIZATIONS PROTOTYPE&gt;</strong></p>				
-					<p class="text-center">
-						<strong>
-						  &lt;The sketch below will be replaced with visualizations — including bar and line plots — that provide insights into the selected pollutant&gt;
-						</strong>
-					</p>					  
-				</div>
-				
-				<div class="img-pair">
-					<img src="assets/plots/barpollutant.png" alt="Pollutant horizontal bar graph visual" width="600" height="400">
-					<img src="assets/plots/mockup_card.png" alt="Mock-up visualization of the flashcard" width="600" height="400">
-				</div>
+					<div class="visuals-container" style="margin: 30px 0;">
+						<header>
+							<h1><i class="fas fa-globe-europe"></i> Country Specific View</h2>
+							<div class="controls-container country-controls">
+							   <div class="control-group">
+								   <label for="country-select">Select Country:</label>
+								   <div class="select-wrapper">
+									   <select id="country-select" aria-label="Select European country"></select>
+									   <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 10l5 5 5-5z" />
+									   </svg>
+								   </div>
+							   </div>
+						   </div>
+						</header>
 
+						<main>
+						   <div id="country-visualization-content" class="country-details-container">
+							   <div id="country-map-section">
+								   <h3><i class="fas fa-map-marked-alt"></i> Pollution Map: <span id="selected-country-name-map">No country selected</span></h3>
+								   <div id="country-map" aria-label="Map showing pollution levels across cities">
+										<p class="placeholder-text">Map loading...</p>
+								   </div>
+							   </div>
+			   
+							   <div id="country-stats-section">
+									<h3><i class="fas fa-chart-bar"></i> Descriptive Statistics: <span id="selected-country-name-stats">No country selected</span></h3>
+			   
+									<div class="stats-chart-container">
+									   <h4><i class="fas fa-bars"></i> Normalized Pollutant Distribution (Z-Score)</h4>
+									   <div id="pollutant-distribution-chart" role="graphics-document" aria-label="Bar chart showing normalized distribution of pollutants">
+										   <p class="placeholder-text">Statistics loading...</p>
+									   </div>
+									   <p class="dominant-pollutant-info">Dominant Pollutant (highest Z-Score): <strong id="dominant-pollutant">N/A</strong></p>
+								   </div>
+			   
+								   <div class="stats-chart-container">
+									   <h4><i class="fas fa-chart-line"></i> Pollutant Evolution</h4>
+									   <div id="pollutant-checkbox-container" class="pollutant-checkboxes" role="group" aria-labelledby="pollutant-checkbox-label">
+											<span id="pollutant-checkbox-label" class="sr-only">Select pollutants for evolution chart:</span>
+											<p class="placeholder-text" style="margin: 5px 0; font-size: 0.85em;">Loading pollutant options...</p>
+									   </div>
+									   <div id="pollutant-evolution-chart" role="graphics-document" aria-label="Line graph showing evolution of selected pollutants">
+											<p class="placeholder-text">Select pollutants to view evolution...</p>
+									   </div>
+									   <div id="evolution-click-info" class="chart-click-info" aria-live="polite">
+										   Click on a point to see details.
+									   </div>
+								   </div>
+			   
+									<div class="stats-chart-container">
+										<h4><i class="fas fa-city"></i> City Comparison (<span id="city-comparison-pollutant">N/A</span>)</h4>
+										 <div class="control-group city-chart-controls">
+										   <label for="city-pollutant-select" class="sr-only">Pollutant for City Comparison:</label>
+										   <div class="select-wrapper small-select">
+											   <select id="city-pollutant-select" aria-label="Select pollutant for city comparison chart"></select>
+											   <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 10l5 5 5-5z" /> </svg>
+										   </div>
+									   </div>
+									   <div id="city-comparison-chart" role="graphics-document" aria-label="Lollipop chart comparing cities within the selected country">
+											<p class="placeholder-text">Select a country and pollutant...</p>
+										</div>
+									</div>
+			   
+							   </div>
+						   </div>
+						</main>		   
+					</div>					  
+				</div>
 			</section>
 
 			<section id="questions" class="main style2 left dark fullscreen">
@@ -168,7 +273,7 @@
 										<h4><span class="navy">Beatrice</span> Grassano</h4>
 										<p>______</p>
 										<ul class="list-inline social-icon"> 
-											<li><a href="https://github.com/TODO" target="blank"><i class="icon brands fa-github"></i></a> </li>
+											<li><a href="https://github.com/beagrs" target="blank"><i class="icon brands fa-github"></i></a> </li>
 											<li><a href="mailto:beatrice.grassano@epfl.ch"><i class="fa fa-envelope"></i></a></li>
 										</ul>
 									</div>
@@ -178,7 +283,7 @@
 										<h4><span class="navy">Emanuele</span> Rimoldi</h4>
 										<p>______</p>
 										<ul class="list-inline social-icon">
-											<li><a href="https://github.com/TODO" target="blank"><i class="icon brands fa-github"></i></a> </li>
+											<li><a href="https://github.com/EmaRimoldi" target="blank"><i class="icon brands fa-github"></i></a> </li>
 											<li><a href="mailto:emanuele.rimoldi@epfl.ch"><i class="fa fa-envelope"></i></a> </li>
 										 </ul>
 									</div>
@@ -201,7 +306,8 @@
 					</ul>
 
 			</footer>
-
+			
+			<div class="tooltip" style="opacity: 0;"></div> 
 			<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.poptrox.min.js"></script>
@@ -212,6 +318,7 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script src="assets/js/typing.js"></script>
+			<script type="module" src="assets/js/script.js"></script>
 
 			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
