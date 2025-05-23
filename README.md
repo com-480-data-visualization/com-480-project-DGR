@@ -17,8 +17,8 @@
 
 ## 📄 Deliverables
 - [Milestone1](./milestone1/Milestone1_DGR.pdf)
-- [Milestone1](./milestone2/Milestone2_DGR.pdf)
-- [Milestone1](./milestone3/ProcessBook_DGR.pdf)
+- [Milestone2](./milestone2/Milestone2_DGR.pdf)
+- [Milestone3](./milestone3/ProcessBook_DGR.pdf)
 - [Website](https://com-480-data-visualization.github.io/com-480-project-DGR/)
 
 ## 🌍 Description
