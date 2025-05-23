@@ -15,12 +15,6 @@
 | [Lorenzo Drudi](https://github.com/drudilorenzo/) | 367980 |
 | [Emanuele Rimoldi](https://github.com/EmaRimoldi) | 377013 |
 
-## 🗂️ Outline
-1. [Abstract](#description)
-2. [Data](#data)
-3. [Conda Env](#conda-env)
-4. [Project Structure](#project-structure)
-
 ## 📄 Deliverables
 - [Milestone1](./milestone1/Milestone1_DGR.pdf)
 - [Milestone1](./milestone2/Milestone2_DGR.pdf)
