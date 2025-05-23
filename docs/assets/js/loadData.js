@@ -3,7 +3,7 @@
 import { availableCountries } from "./countries.js";
 
 async function loadAndTransformData() {
-    const res = await fetch('../data/air_quality_data.json');
+    const res = await fetch('./assets/data/air_quality_data.json');
     const rawData = await res.json();
     const data = {};
   
@@ -31,7 +31,7 @@ async function loadAndTransformData() {
 }
 
 async function loadCountrySpecificData() {
-    const response = await fetch("../data/air_quality_data.json");
+    const response = await fetch("./assets/data/air_quality_data.json");
     const rawData = await response.json();
   
     const result = {};
@@ -166,7 +166,7 @@ function getAQIFromPM25(pm) {
 }
 
 async function loadAQIData(timeframe) {
-    const response = await fetch("../data/air_quality_data.json");
+    const response = await fetch("./assets/data/air_quality_data.json");
     const rawData = await response.json();
 
     const results = [];
@@ -208,7 +208,7 @@ async function loadAQIData(timeframe) {
 }
 
 async function loadEVData() {
-    const rawData = await fetch("../data/electric_car_share_data.json");
+    const rawData = await fetch("./assets/data/electric_car_share_data.json");
     const evData = await rawData.json();
 
     const colorScale = d3.scaleOrdinal(d3.schemeTableau10);
