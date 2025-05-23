@@ -1,3 +1,12 @@
+"""
+
+Python script used to map pollutant codes to pollutant names.
+
+For the documentation see:
+https://www.eea.europa.eu/data-and-maps/data/airbase-the-european-air-quality-database-6/airbase-products/data/file
+
+"""
+
 import gc
 import tqdm
 import airbase
