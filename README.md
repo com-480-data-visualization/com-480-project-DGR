@@ -1,59 +1,122 @@
-# Project of Data Visualization (COM-480)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
 
+# SmogSense | Team DGR | EPFL COM-480
+
+<img src="docs/assets/images/logo.png" alt="Logo" width="150" />
+
+## 👥 Team DGR
 | Student's name | SCIPER |
 | -------------- | ------ |
-| Beatrice Grassano | 370780 |
-| Lorenzo Drudi | 367980 |
-| Emanuele Rimoldi | 377013 |
+| [Beatrice Grassano](https://github.com/beagrs) | 370780 |
+| [Lorenzo Drudi](https://github.com/drudilorenzo/) | 367980 |
+| [Emanuele Rimoldi](https://github.com/EmaRimoldi) | 377013 |
 
-[Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
+## 🗂️ Outline
+1. [Abstract](#abstract)
+2. [Data](#data)
+3. [Conda Env](#conda-env)
+4. [Project Structure](#project-structure)
 
-## Milestone 1 (21st March, 5pm)
+## 📄 Deliverables
+- [Milestone1](./milestone1/Milestone1_DGR.pdf)
+- [Milestone1](./milestone2/Milestone2_DGR.pdf)
+- [Milestone1](./milestone3/ProcessBook_DGR.pdf)
+- [Website](https://com-480-data-visualization.github.io/com-480-project-DGR/)
 
-**10% of the final grade**
+## 🌍 Description
 
-This is a preliminary milestone to let you set up goals for your final project and assess the feasibility of your ideas.
-Please, fill the following sections about your project.
+This project investigates how air quality in the European Union has evolved over the past 20 years and explores potential future trends based on current data. We analyze key pollutants, their sources, and their health and environmental impacts.
 
-*(max. 2000 characters per section)*
+Through interactive visualizations, we aim to make complex data accessible and engaging for both experts and the general public. Additionally, a dedicated Curiosities section showcases compelling insights — such as the influence of electric vehicles on air quality — using striking and informative visuals.
 
-### Dataset
+## Data
 
-> Find a dataset (or multiple) that you will explore. Assess the quality of the data it contains and how much preprocessing / data-cleaning it will require before tackling visualization. We recommend using a standard dataset as this course is not about scraping nor data processing.
->
-> Hint: some good pointers for finding quality publicly available datasets ([Google dataset search](https://datasetsearch.research.google.com/), [Kaggle](https://www.kaggle.com/datasets), [OpenSwissData](https://opendata.swiss/en/), [SNAP](https://snap.stanford.edu/data/) and [FiveThirtyEight](https://data.fivethirtyeight.com/)), you could use also the DataSets proposed by the ENAC (see the Announcements section on Zulip).
+### 📊 AirBase
 
-### Problematic
+Maintained by the European Environment Agency (EEA), [AirBase](https://www.eea.europa.eu/en/datahub/datahubitem-view/778ef9f5-6293-4846-badd-56a29c70880d?activeAccordion=1087599) is our primary data source. It compiles air quality measurements from EU Member States, EEA countries, and partner nations. The dataset includes a multiyear time series of pollutant levels, along with metadata on monitoring networks and stations.
 
-> Frame the general topic of your visualization and the main axis that you want to develop.
-> - What am I trying to show with my visualization?
-> - Think of an overview for the project, your motivation, and the target audience.
+🧪 Scripts & Notebooks:
+- `data/download_eea_air_quality_data.py` — Python script to download AirBase data.
+- `analysis/eea_air_quality_data_eda.ipynb` — Initial exploratory data analysis of the dataset.
+- `preprocess/*` — Scripts used to aggregate and clean the data into the final file `air_quality_data.json`, which is consumed by the web app. 
 
-### Exploratory Data Analysis
+🔗 Useful Links:
+- 📄 [Official Datasheet](https://www.eea.europa.eu/data-and-maps/data/airbase-the-european-air-quality-database-6/airbase-products/data/file)
+- 🐍 [Python Downloader](https://github.com/JohnPaton/airbase)
 
-> Pre-processing of the data set you chose
-> - Show some basic statistics and get insights about the data
+### 🌍 Global EV Outlook 2025
 
-### Related work
+The Global EV Outlook [1] is an annual report that presents key trends and developments in electric mobility worldwide. It is developed with the support of the Electric Vehicles Initiative (EVI).
 
+For further insights, refer to the dedicated article by Our World in Data [2].
 
-> - What others have already done with the data?
-> - Why is your approach original?
-> - What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
-> - In case you are using a dataset that you have already explored in another context (ML or ADA course, semester project...), you are required to share the report of that work to outline the differences with the submission for this class.
+🧪 Scripts & Notebooks:
+- `preprocess/build_ev_share_json.ipynb` — Notebook used to clean and process the data into the file electric_car_share_data.json, which is consumed by the web app.
 
-## Milestone 2 (18th April, 5pm)
+📚 Citations:
+- [1] IEA (2025), Global EV Outlook 2025, IEA, Paris. https://www.iea.org/reports/global-ev-outlook-2025 — Licence: CC BY 4.0
+- [2] Hannah Ritchie (2024), Tracking Global Data on Electric Vehicles. Published online at OurWorldinData.org. Retrieved from: https://ourworldindata.org/electric-car-sales
 
-**10% of the final grade**
+## 📦 Conda Env
 
+To run the provided Python scripts and notebooks, use the `dataviz` conda environment.
+You can create it by running the following command:
 
-## Milestone 3 (30th May, 5pm)
+```bash
+conda env create -f dataviz.yml
+```
 
-**80% of the final grade**
+Once created, activate the environment with:
 
+```bash
+conda activate dataviz
+```
 
-## Late policy
+## 🧱 Project Structure
 
-- < 24h: 80% of the grade for the milestone
-- < 48h: 70% of the grade for the milestone
+```text
+COM-480-PROJECT-DGR/
+│
+├── analysis/                         # Jupyter notebooks for EDA
+│   └── eea_air_quality_data_eda.ipynb
+│
+├── data/                             # Datasets and Download scripts
+│   ├── air_quality_data.json
+│   ├── electric_car_share_data.json
+│   ├── download_eea_air_quality_data.py
+│   └── scraper_immobiliare_it.py
+│
+├── preprocess/                       # Scripts for cleaning and preprocessing
+│   ├── aggregate_air_quality_data.py
+│   ├── build_air_quality_json.ipynb
+│   ├── build_ev_share_json.ipynb
+│   └── map_pollutant_code_to_name.py
+│
+├── docs/                             # Website
+│   ├── assets/...
+│   ├── index.html
+│   ├── .nojekyll
+│
+├── milestone1/                       # Reports
+│   └── Milestone1_DGR.pdf
+├── milestone2/
+│   └── Milestone2_DGR.pdf
+├── milestone3/
+│   └── ProcessBook_DGR.pdf
+│
+├── dataviz.yml                       # Conda environment configuration
+├── .gitignore
+└── README.md                         # Project overview and instructions
+```
 
+## 🗂️ Folder Highlights
+
+- `data/` — Contains data files, as well as scripts for downloading the datasets.
+- `preprocess/` — Includes notebooks and scripts for cleaning and converting data into formats used by the web app.
+- `analysis/` — Exploratory analysis of air quality data using Jupyter.
+- `docs/` — Web app source code and assets, deployed via GitHub Pages.
+- `milestone*/` — Milestone report PDFs documenting project progress.
