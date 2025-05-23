@@ -1,4 +1,4 @@
-# Byte-compiled / optimized / DLL files
+# Byte-compiled / Optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
@@ -34,3 +34,5 @@ MANIFEST
 data/**
 !data/download_eea_air_quality_data.py
 !data/scraper_immobiliare_it.py
+!data/electric_car_share_data.json
+!data/air_quality_data.json
