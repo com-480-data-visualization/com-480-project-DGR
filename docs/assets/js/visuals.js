@@ -155,20 +155,6 @@ function debounce(func, wait, immediate) {
     }; 
 }
 
-function showLoader() { 
-    chartLoader.style("display", "flex").style("opacity", 1);
-}
-
-function hideLoader() { 
-    chartLoader
-        .transition("loaderFade")
-        .duration(200)
-        .style("opacity", 0)
-        .end().then(
-            () => chartLoader.style("display", "none")).catch(() => chartLoader.style("display", "none")
-        );
-}
-
 function calculateZScores(data) { 
     const values = Object.values(data).filter(v => typeof v === 'number' && isFinite(v));
     if (values.length < 2) 
@@ -209,10 +195,11 @@ function applyTheme(theme) {
 function toggleTheme() {
     const currentTheme = document.documentElement.dataset.theme || "light";
     const newTheme = currentTheme === "light" ? "dark" : "light";
-    applyTheme(newTheme);
+    applyTheme('light');
 }
 function loadThemePreference() {
-    const preferredTheme = localStorage.getItem("dashboardTheme");
+    let preferredTheme = localStorage.getItem("dashboardTheme");
+    preferredTheme = 'light'
     if (preferredTheme) {
         applyTheme(preferredTheme);
     } else {
@@ -225,6 +212,8 @@ function positionTooltip(event, tooltipSelection) {
     const tooltipNode = tooltipSelection.node();
     if (!tooltipNode) return;
 
+    console.log("Tooltip node:", tooltipNode);
+
     const rect = tooltipNode.getBoundingClientRect();
     const tooltipWidth = rect.width;
     const tooltipHeight = rect.height;
@@ -232,11 +221,13 @@ function positionTooltip(event, tooltipSelection) {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
 
+    // Calculate desired position
     let left = event.pageX + 12;
-    let top = event.pageY - tooltipHeight - 12;
+    let top = event.pageY - tooltipHeight - 12; // Position above the cursor
 
-    if (left + tooltipWidth > viewportWidth - 20) {
-        left = event.pageX - tooltipWidth - 12;
+    // Adjust if it goes off the right edge
+    if (left + tooltipWidth > viewportWidth - 20) { // 20px margin from right edge
+        left = event.pageX - tooltipWidth - 12; // Position to the left of the cursor
     }
 
     if (top < 10) {
@@ -244,9 +235,17 @@ function positionTooltip(event, tooltipSelection) {
     }
 
     tooltipSelection.style("left", left + "px").style("top", top + "px");
+
+    // tooltipSelection.style("left", event.clientX + "px").style("top", event.clientY + "px");
+
+    console.log("Tooltip HTML:", tooltipSelection.html());
+    console.log("Tooltip position - Left:", tooltipSelection.style("left"));
+    console.log("Tooltip position - Top:", tooltipSelection.style("top"));
 }
 
 function handleMouseOver(event, d) {
+
+    console.log("Mouseover event:", d);
     let countryName = d.Paese || d.name || d.pollutant || "N/A";
     let value, unit, isZScore = false, yearInfo = d.year || null;
 
@@ -501,6 +500,7 @@ async function updateEuropeHeatmap(timeframe = null) {
     heatmapContainerEurope.select(".placeholder-text").remove();
 
     const aqiDataForLayer = await loadAQIData(timeframe);
+    currentAqiDataPoints = aqiDataForLayer
 
     if (heatLayer) {
         europeHeatmap.removeLayer(heatLayer);
@@ -632,7 +632,11 @@ function initializeEuropeHeatmap() {
         europeHeatmap.on('mouseout', function() { mapTooltip.style("display", "none"); });
 
         europeHeatmap.on('click', function(e) {
+            console.log("Clicked on map:", e.latlng);
+            console.log("Clicked on map2:", heatLayer);
+            console.log("Clicked on map3:", currentAqiDataPoints);
             if (!currentAqiDataPoints || currentAqiDataPoints.length === 0 || !heatLayer) return;
+            console.log("Clicked on map3:", e.latlng);
             let nearestPoint = null;
             let minDist = Infinity;
             currentAqiDataPoints.forEach(point => {
@@ -643,11 +647,11 @@ function initializeEuropeHeatmap() {
                 }
             });
 
-            let popupContent = `<strong>Location Details (Simulated)</strong><br>Lat: ${e.latlng.lat.toFixed(3)}, Lon: ${e.latlng.lng.toFixed(3)}`;
+            let popupContent = `<strong>Location Details</strong><br>Lat: ${e.latlng.lat.toFixed(3)}, Lon: ${e.latlng.lng.toFixed(3)}`;
             if (nearestPoint && minDist < 200) {
-                popupContent += `<br>Approx. AQI: <strong>${nearestPoint[2]}</strong> (from zone: ${nearestPoint[3]})`;
+                popupContent += `<br>Approx. AQI: ${nearestPoint[2]}`;
                 const simulatedFactors = ["local traffic", "regional transport", "weather patterns", "industrial activity", "natural sources"];
-                popupContent += `<br><small>Possible factors: ${simulatedFactors[Math.floor(Math.random()*simulatedFactors.length)]} (example)</small>`;
+                popupContent += `<br><small>Possible factors: ${simulatedFactors[Math.floor(Math.random()*simulatedFactors.length)]}</small>`;
             } else {
                 popupContent += `<br>No detailed data nearby.`;
             }
@@ -712,8 +716,7 @@ function createPopupContent(city) {
 
     return `
         <div class="popup-header ${aqiCategoryDetails.popupClass}">
-            <span class="popup-aqi-icon"><i class="${aqiCategoryDetails.icon}"></i></span>
-            <span class="popup-aqi-category">${aqiCategoryDetails.level}</span>
+            <span class="popup-aqi-icon">Sampling Point Details</span>
         </div>
         <div class="popup-body">
             <h4 class="popup-city-name">${city.name}</h4>
@@ -861,7 +864,7 @@ function updatePollutantDistributionChart(countryName, countryData, selectedCity
 
     svg.append("text").attr("class", "x-axis-label dist-label axis-label")
         .attr("x", pDistInnerWidth / 2)
-        .attr("y", pDistInnerHeight + pDistMargin.bottom - 25)
+        .attr("y", pDistInnerHeight + pDistMargin.bottom - 15)
         .text("Z-Score (Normalized Value)");
 
     selectedCountryNameStats.text(countryName);
@@ -932,7 +935,7 @@ function updateCityLollipopChart(countryName, countryData, selectedPollutant, in
         .attr("r", 0)
         .on("mouseover", function(event, d) {
             d3.select(this).transition("dotHoverLolli").duration(100).attr("r", 7.5).style("filter", "brightness(0.85)");
-            tooltip.html(`<strong>${d.name}</strong><br>${selectedPollutant}: ${d.value.toFixed(1)} µg/m³`);
+            tooltip.html(`<strong>${d.name}</strong><br>${selectedPollutant}: <i style="color: var(--text-accent)" >${d.value.toFixed(1)}</i> µg/m³`);
             tooltip.transition("tooltipFade").duration(100).style("opacity", 1).style("transform", "translateY(0px)");
             positionTooltip(event, tooltip);
 
@@ -952,6 +955,7 @@ function updateCityLollipopChart(countryName, countryData, selectedPollutant, in
         .attr("y", 0)
         .attr("dy", "0.35em")
         .style("text-anchor", "start")
+        .style("font-size", "15px")
         .style("opacity", 0)
         .text(d => `${d.value.toFixed(1)} µg/m³`)
         .transition().duration(600).delay((d,i) => i * 60 + 200)
@@ -965,7 +969,7 @@ function updateCityLollipopChart(countryName, countryData, selectedPollutant, in
             .attr("y1", -5).attr("y2", innerHeightLollipop + 5)
             .style("opacity", 0).transition().duration(500).delay(400).style("opacity", 0.75);
         svg.append("text").attr("class", "guideline-label")
-            .attr("x", xLolli(guidelineVal)).attr("y", -8)
+            .attr("x", xLolli(guidelineVal)).attr("y", 0)
             .text(`WHO Guideline (${guidelineVal})`)
             .style("opacity", 0).transition().duration(500).delay(400).style("opacity", 1);
     } else {
@@ -1095,7 +1099,7 @@ function updatePollutantEvolutionChart(countryName, countryData, pollutantsToPlo
                 if (!(currentlySelectedPoint && d.year === currentlySelectedPoint.year && series.pollutant === currentlySelectedPoint.pollutant)) {
                     d3.select(this).transition("pointHover").duration(100).attr("r", 6.5).style("opacity", 1);
                 }
-                tooltip.html(`<strong>${series.pollutant}</strong><br>Year: ${d.year}<br>Value: ${d.value.toFixed(1)} µg/m³`);
+                tooltip.html(`<strong>${series.pollutant}</strong><br>Year: ${d.year}<br>Value: <i style="color: var(--text-accent)" >${d.value.toFixed(1)}</i> µg/m³`);
                 tooltip.transition("tooltipFade").duration(100).style("opacity", 1).style("transform", "translateY(0px)");
                 positionTooltip(event, tooltip);
 
@@ -1371,7 +1375,7 @@ async function drawEVAirQualityCorrelationChart(animate = true) {
     svgEV.append("g").attr("class", "y-axis ev-axis ev-axis-left axis").call(d3.axisLeft(yEVLeft).ticks(6).tickSizeInner(-evChartInnerWidth).tickPadding(8));
     svgEV.append("g").attr("class", "y-axis ev-axis ev-axis-right axis").attr("transform", `translate(${evChartInnerWidth},0)`).call(d3.axisRight(yEVRight).ticks(6).tickPadding(8));
     svgEV.selectAll(".ev-axis .tick line").style("stroke-dasharray", "var(--grid-line-style-dense)").style("opacity",0.5);
-    svgEV.append("text").attr("class", "axis-label y-left-label").attr("transform", "rotate(-90)").attr("y", 0 - evChartMargin.left + 20).attr("x", 0 - (evChartInnerHeight / 2)).attr("dy", "1em").style("text-anchor", "middle").text("EV Purchases");
+    svgEV.append("text").attr("class", "axis-label y-left-label").attr("transform", "rotate(-90)").attr("y", 0 - evChartMargin.left + 20).attr("x", 0 - (evChartInnerHeight / 2)).attr("dy", "1em").style("text-anchor", "middle").text("EV Purchases Share (%)");
     svgEV.append("text").attr("class", "axis-label y-right-label").attr("transform", "rotate(-90)").attr("y", evChartInnerWidth + evChartMargin.right - 25).attr("x", 0 - (evChartInnerHeight / 2)).attr("dy", "1em").style("text-anchor", "middle").text("Avg. PM2.5 (µg/m³)");
 
     const avgEVAll = d3.mean(plotData.flatMap(d => d.purchases.map(p => p.value)));
@@ -1388,7 +1392,7 @@ async function drawEVAirQualityCorrelationChart(animate = true) {
             .attr("x", evChartInnerWidth).attr("y", yEVLeft(avgEVAll) - 5)
             .attr("text-anchor", "end")
             .style("fill", "#999")
-            .text(`Avg. EV: ${Math.round(avgEVAll).toLocaleString()}`);
+            .text(`Avg. EV (%): ${Math.round(avgEVAll).toLocaleString()}`);
     }
 
     if (avgPM25All !== undefined && avgPM25All !== null && !isNaN(avgPM25All)) {

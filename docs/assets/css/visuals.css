@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+#red i::before { 
+    color: #e74c3c; 
+}
+
 :root {
     --font-primary: 'Inter', sans-serif;
     --base-font-size: 18px;
@@ -270,7 +274,7 @@ input[type="range"]:focus::-moz-range-thumb { box-shadow: 0 0 0 3px var(--bg-con
 
 section#europe-heatmap-section { display: flex; flex-direction: column; gap: 15px; width: 100%; margin-top: 5px; margin-bottom: 20px; }
 section#europe-heatmap-section > h2 { margin: 0 0 5px 0; font-size: 1.55em; color: var(--text-primary); font-weight: 600; border-bottom: 1px solid var(--border-secondary); padding-bottom: 10px; display: flex; align-items: center; gap: 8px; transition: color 0.3s, border-color 0.3s; }
-section#europe-heatmap-section > h2 i { color: #e74c3c; font-size: 0.9em; }
+section#europe-heatmap-section > h1 i { color: #e74c3c; font-size: 0.9em; }
 .heatmap-controls { display: flex; justify-content: space-around; padding-bottom: 10px; margin-top: 0; width: 100%; gap: 20px; }
 .heatmap-controls .control-group { flex: 1; min-width: 180px; max-width: 250px; }
 
@@ -279,7 +283,7 @@ section#europe-heatmap-section > h2 i { color: #e74c3c; font-size: 0.9em; }
 #heatmap-container-europe .placeholder-text { position: static; transform: none; font-size: var(--small-font-size); padding: 20px; }
 #heatmap-container-europe .leaflet-container { border-radius: 10px; }
 
-#heatmap-legend-europe { flex-basis: 230px; flex-shrink: 0; padding: 15px; background-color: var(--bg-control); border-radius: 8px; border: 1px solid var(--border-primary); box-shadow: var(--shadow-md); display: flex; flex-direction: column; gap: 8px; align-self: flex-start; max-height: 550px; overflow-y: auto; transition: background-color 0.3s, border-color 0.3s; }
+#heatmap-legend-europe { flex-basis: 230px; flex-shrink: 0; padding: 15px; background-color: var(--bg-control); border-radius: 8px; border: 1px solid var(--border-primary); box-shadow: var(--shadow-md); display: flex; flex-direction: column; gap: 8px; align-self: flex-start; max-height: 650px; overflow-y: auto; transition: background-color 0.3s, border-color 0.3s; }
 #heatmap-legend-europe h4 { margin: 0 0 10px 0; font-size: 1.05em; font-weight: 600; color: var(--text-primary); padding-bottom: 8px; border-bottom: 1px solid var(--border-secondary); text-align: center; transition: color 0.3s, border-color 0.3s; }
 .heatmap-legend-item { display: flex; align-items: center; gap: 10px; font-size: var(--small-font-size);  color: var(--text-secondary); padding: 4px 6px; transition: background-color 0.15s ease-out; border-radius: 4px; cursor: default; }
 .heatmap-legend-item:hover { background-color: var(--border-secondary); }
@@ -507,12 +511,28 @@ html[data-theme="dark"] .pollutant-checkboxes input[type="checkbox"]:checked + .
 .chart-click-info .value { font-weight: 600; color: var(--text-accent-dark); }
 .chart-click-info .year { color: var(--text-muted); }
 
-.tooltip { background-color: var(--bg-tooltip); color: var(--text-tooltip); font-size: var(--tooltip-font-size); transition: background-color 0.3s, color 0.3s, opacity 0.15s, transform 0.15s; }
-.tooltip-country { color: var(--text-tooltip-strong); font-size: 1.05em; }
+.tooltip {
+  position: absolute;
+  z-index: 1000;
+  max-width: 280px;
+  background-color: var(--bg-map-tooltip);
+  color: var(--text-primary);
+  font-size: var(--tooltip-font-size);
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border-map-tooltip);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  white-space: normal;
+  line-height: 1.4;
+  transition: background-color 0.3s, color 0.3s, opacity 0.15s, transform 0.15s;
+  pointer-events: none;
+}
+
+.tooltip-country { color: var(--text-primary); font-size: 1.05em; }
 .tooltip-detail { margin-top: 4px; }
 .tooltip-value { color: var(--text-accent); font-weight: 600; }
 .tooltip-unit { color: var(--text-muted); font-size: 0.9em;}
-.tooltip-year { color: var(--text-muted); font-size: 0.9em; margin-top: 4px; }
+.tooltip-year { color: var(--text-accent); font-size: 0.9em; margin-top: 4px; }
 html[data-theme="dark"] .tooltip-unit, html[data-theme="dark"] .tooltip-year { color: var(--text-muted); }
 
 .dominant-pollutant-info { font-size: var(--small-font-size); color: var(--text-secondary); margin-top: 12px; text-align: center; transition: color 0.3s;}

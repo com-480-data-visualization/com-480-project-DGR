@@ -197,35 +197,40 @@ function loadThemePreference() {
 // --- FUNZIONI TOOLTIP GLOBALE (da V27) ---
 // Helper function to position the tooltip
 function positionTooltip(event, tooltipSelection) {
-     if (tooltipSelection.empty()) return;
-     const tooltipNode = tooltipSelection.node();
-     if (!tooltipNode) return;
+    console.log("Positioning tooltip...");
+    if (tooltipSelection.empty()) return;
+    console.log("Positioning tooltip 2...");
+    const tooltipNode = tooltipSelection.node();
+    if (!tooltipNode) return;
 
-     // Get tooltip dimensions after content is set
-     const rect = tooltipNode.getBoundingClientRect();
-     const tooltipWidth = rect.width;
-     const tooltipHeight = rect.height;
+    console.log("Positioning tooltip 3...");
+    // Get tooltip dimensions after content is set
+    const rect = tooltipNode.getBoundingClientRect();
+    const tooltipWidth = rect.width;
+    const tooltipHeight = rect.height;
 
-     // Get viewport dimensions
-     const viewportWidth = window.innerWidth;
-     const viewportHeight = window.innerHeight;
+    // Get viewport dimensions
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
 
-     // Calculate desired position
-     let left = event.pageX + 12;
-     let top = event.pageY - tooltipHeight - 12; // Position above the cursor
+    // Calculate desired position
+    let left = event.pageX + 12;
+    let top = event.pageY - tooltipHeight - 12; // Position above the cursor
 
-     // Adjust if it goes off the right edge
-     if (left + tooltipWidth > viewportWidth - 20) { // 20px margin from right edge
-         left = event.pageX - tooltipWidth - 12; // Position to the left of the cursor
-     }
+    // Adjust if it goes off the right edge
+    if (left + tooltipWidth > viewportWidth - 20) { // 20px margin from right edge
+        left = event.pageX - tooltipWidth - 12; // Position to the left of the cursor
+    }
 
-     // Adjust if it goes off the top edge
-     if (top < 10) { // 10px margin from top edge
-         top = event.pageY + 18; // Position below the cursor
-     }
+    // Adjust if it goes off the top edge
+    if (top < 10) { // 10px margin from top edge
+        top = event.pageY + 18; // Position below the cursor
+    }
 
-     // Apply position
-     tooltipSelection.style("left", left + "px").style("top", top + "px");
+    // Apply position
+    tooltipSelection.style("left", left + "px").style("top", top + "px");
+
+    tooltipSelection.style("left", event.pageX + "px").style("top", event.pageY + "px");
 }
 
 function handleMouseOver(event, d) {
@@ -262,6 +267,8 @@ function handleMouseOver(event, d) {
 
     // Then transition appearance
     tooltip.transition("tooltipFade").duration(100).style("opacity", 1).style("transform", "translateY(0px)");
+
+        
 
     // Position the tooltip
     positionTooltip(event, tooltip);

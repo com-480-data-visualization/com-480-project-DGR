@@ -24,9 +24,9 @@
 				<a id="logo" class="logo" href="#">SmogSense</a>
 				<nav>
 					<ul>
-						<li><a href="#europe">Europe</a></li>
-						<li><a href="#country">Country</a></li>
-						<li><a href="#polluttants">Pollutants</a></li>
+						<li><a href="#heatmap">Heatmap</a></li>
+						<li><a href="#trends">Trends</a></li>
+						<li><a href="#countries">Countries</a></li>
 						<li><a href="#curiosities">Curiosities</a></li>
 						<li><a href="#footer">Team</a></li>
 					</ul>
@@ -58,10 +58,10 @@
 						<h2>Visualizing pollution across Europe</h2>
 					</header>
 				</div>
-				<a href="#europe" class="button style2 down anchored">Next</a>
+				<a href="#heatmap" class="button style2 down anchored">Next</a>
 			</section>
 
-			<section id="europe" class="gray main style3">
+			<section id="heatmap" class="gray main style3">
 				<div class="content text-center">
 					<p>As you begin your journey with SmogSense, the first thing you'll encounter is our dynamic heatmap of Europe.</p>
 					<p>This tool gives you an immediate snapshot of air quality across the continent, showing where pollution is at its highest and how it changes over time.</p>
@@ -71,7 +71,7 @@
 
 					<div id="europe-heatmap-section" class="visuals-container" style="margin: 30px 0;">
 						<header>
-							<h1><i class="fas fa-fire" aria-hidden="true"></i> Europe Air Quality Heatmap (AQI)</h2>
+							<h1 id="red"><i class="fas fa-fire" aria-hidden="true"></i> Europe Air Quality Heatmap (AQI)</h2>
 							<div class="controls-container heatmap-controls">
 								<div class="control-group">
 									<label for="heatmap-timeframe-select">Timeframe:</label>
@@ -118,10 +118,10 @@
 						<h2>Dive deeper into pollution at the country level</h2>
 					</header>
 				</div>
-				<a href="#country" class="button style2 down anchored">Next</a>
+				<a href="#trends" class="button style2 down anchored">Next</a>
 			</section>
 
-			<section id="country" class="gray main style3">
+			<section id="trends" class="gray main style3">
 				<div class="content text-center">
 					<p>Have you ever wondered how air pollution impacts individual countries? Which country is the most polluted?</p>
 					<p>Explore the interactive map and choose the country you want to investigate. Once selected, the journey continues with a detailed view: on the left, a map showing the selected country, and on the right, interactive graphs that dive deep into key pollutants like PM2.5, CO, and many others.</p>
@@ -183,10 +183,10 @@
 							<h2>Unveiling the biggest pollutants and their impact</h2>
 						</header>
 					</div>
-					<a href="#polluttants" class="button style2 down anchored">Next</a>
+					<a href="#countries" class="button style2 down anchored">Next</a>
 			</section>
 
-			<section id="polluttants" class="gray main style3">
+			<section id="countries" class="gray main style3">
 				<div class="content text-center">
 					<p> What's next? Now, let's zoom in even further.</p>
 					<p>Want to know which pollutants are making the biggest impact? This section lets you focus on specific pollutants and shows you which countries are most affected.</p>
@@ -225,7 +225,7 @@
 										<div id="pollutant-distribution-chart" role="graphics-document" aria-label="Bar chart showing normalized distribution of pollutants">
 											<p class="placeholder-text">Statistics loading...</p>
 										</div>
-										<p class="dominant-pollutant-info">Dominant Pollutant (highest Z-Score): <strong id="dominant-pollutant">N/A</strong></p>
+										<p class="dominant-pollutant-info value">Dominant Pollutant (highest Z-Score): <strong id="dominant-pollutant">N/A</strong></p>
 									</div>
 									<div class="stats-chart-container">
 										<h4><i class="fas fa-chart-line"></i> Pollutant Evolution</h4>
@@ -307,7 +307,7 @@
 								<div id="ev-air-quality-chart" role="graphics-document" aria-label="Line graph showing EV purchases and air quality correlation">
 									<p class="placeholder-text">Select a country to view data.</p>
 								</div>
-								<div id="ev-chart-tooltip" class="tooltip" style="opacity: 0;"></div>
+								<div id="ev-chart-tooltip" style="opacity: 0;"></div>
 							</div>
 							<div id="ev-chart-legend" class="chart-legend"></div>
 						</main>
@@ -364,7 +364,8 @@
 
 			</footer>
 			
-			<div class="tooltip" style="opacity: 0;"></div> 
+			<div class="tooltip"></div> 
+			
 			<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.poptrox.min.js"></script>
@@ -375,7 +376,7 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script src="assets/js/typing.js"></script>
-			<script type="module" src="assets/js/script.js"></script>
+			<script type="module" src="assets/js/visuals.js"></script>
 
 			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

@@ -8,43 +8,13 @@ import { loadAndTransformData } from './loadData.js';
 import {
     flashcard,
     tooltip,
-    themeToggleButton,
-    currentYearFooterSpan,
-    heatmapContainerEurope,
-    heatmapTimeframeSelect,
-    heatmapLegendContainer,
-    heatmapRadiusSlider,
-    heatmapRadiusValue,
-    heatmapBlurSlider,
-    heatmapBlurValue,
-    mapTooltip,
     chartContainer,
-    chartLoader,
     playPauseButton,
     currentYearDisplay,
     yearSlider,
     yearSliderValue,
     countryViewSection,
     countrySelect,
-    countryVisualizationContent,
-    countryMapSection,
-    countryStatsSection,
-    countryMapContainer,
-    pollutantDistributionChartContainer,
-    pollutantEvolutionChartContainer,
-    evolutionCheckboxContainer,
-    evolutionClickInfoContainer,
-    selectedCountryNameMap,
-    selectedCountryNameStats,
-    dominantPollutantDisplay,
-    cityComparisonChartContainer,
-    cityComparisonPollutantSpan,
-    cityPollutantSelect,
-    evCountrySelect1,
-    evCountrySelect2,
-    evAirQualityChartContainer,
-    evAirQualityChartDiv,
-    evChartLegendContainer,
     pollutantSelect
 } from './selectors.js';
 
@@ -128,10 +98,10 @@ function handleMouseOver(event, d) {
 
 function handleMouseOut(event, d) {
     // Transition appearance to hide
-    tooltip.transition("tooltipFadeOut").duration(150).style("opacity", 0).style("transform", "translateY(5px)");
+    // tooltip.transition("tooltipFadeOut").duration(150).style("opacity", 0).style("transform", "translateY(5px)");
 
-    // Revert visual highlight
-    d3.select(this).style("filter", "brightness(1)");
+    // // Revert visual highlight
+    // d3.select(this).style("filter", "brightness(1)");
 }
 
 
