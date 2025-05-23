@@ -1,5 +1,9 @@
+// Functions used to load and transform data for the air quality dashboard
+
+import { availableCountries } from "./countries.js";
+
 async function loadAndTransformData() {
-    const res = await fetch('../data/aggregated_air_quality_yearly_json/all.json');
+    const res = await fetch('../data/air_quality_data.json');
     const rawData = await res.json();
     const data = {};
   
@@ -27,7 +31,7 @@ async function loadAndTransformData() {
 }
 
 async function loadCountrySpecificData() {
-    const response = await fetch("../data/aggregated_air_quality_yearly_json/all.json");
+    const response = await fetch("../data/air_quality_data.json");
     const rawData = await response.json();
   
     const result = {};
@@ -139,4 +143,107 @@ async function loadCountrySpecificData() {
     return result;
 }
 
-export { loadAndTransformData, loadCountrySpecificData };
+function getAQIFromPM25(pm) {
+  const breakpoints = [
+    { c_low: 0.0, c_high: 12.0, i_low: 0,   i_high: 50 },
+    { c_low: 12.1, c_high: 35.4, i_low: 51, i_high: 100 },
+    { c_low: 35.5, c_high: 55.4, i_low: 101, i_high: 150 },
+    { c_low: 55.5, c_high: 150.4, i_low: 151, i_high: 200 },
+    { c_low: 150.5, c_high: 250.4, i_low: 201, i_high: 300 },
+    { c_low: 250.5, c_high: 350.4, i_low: 301, i_high: 400 },
+    { c_low: 350.5, c_high: Infinity, i_low: 401, i_high: 500 },
+  ];
+
+  for (const bp of breakpoints) {
+    if (pm >= bp.c_low && pm <= bp.c_high) {
+      return Math.round(
+        ((bp.i_high - bp.i_low) / (bp.c_high - bp.c_low)) * (pm - bp.c_low) + bp.i_low
+      );
+    }
+  }
+
+  return null;
+}
+
+async function loadAQIData(timeframe) {
+    const response = await fetch("../data/air_quality_data.json");
+    const rawData = await response.json();
+
+    const results = [];
+    const years = Object.keys(rawData).map(Number).sort((a, b) => a - b);
+
+    let data = null;
+    switch (timeframe) {
+        case "2023":
+            data = rawData[2023]["PM2.5"];
+            break;
+        case "2022":
+            data = rawData[2022]["PM2.5"];
+            break;
+        case "year":
+            data = rawData[years[years.length - 1]]["PM2.5"];
+            break;
+        default:
+            data = rawData[years[years.length - 1]]["PM2.5"];
+            break;
+    }
+
+    for (const country of availableCountries) {
+        if (!data[country]) {
+            continue;
+        }
+        for (const entry of data[country]) {
+            if (!entry.Latitude || !entry.Longitude) {
+                continue;
+            }
+            const aqi = getAQIFromPM25(entry.Concentration);
+            results.push([
+                entry.Latitude,
+                entry.Longitude,
+                aqi
+            ])
+        }
+    }
+    return results;
+}
+
+async function loadEVData() {
+    const rawData = await fetch("../data/electric_car_share_data.json");
+    const evData = await rawData.json();
+
+    const colorScale = d3.scaleOrdinal(d3.schemeTableau10);
+    const countryColors = availableCountries.map(country => colorScale(country));
+
+    const results = {};
+    for (const country of availableCountries) {
+        results[country] = {
+            ev_purchases: {},
+            avg_pm25: {},
+            color: countryColors[availableCountries.indexOf(country)],
+        };
+
+        let evDataCountry = evData[country];
+        if (!evDataCountry) {
+            evDataCountry = evData["Europe"]
+        }
+        for (const year in evDataCountry) {
+            results[country].ev_purchases[year] = evDataCountry[year];
+        }
+    }
+
+    const countryData = await loadAndTransformData();
+    for (const year in countryData) {
+        const pm25Data = countryData[year]?.["PM2.5"];
+        if (pm25Data) {
+            for (const entry of pm25Data) {
+                if (entry.Paese in results) {
+                    results[entry.Paese].avg_pm25[year] = entry.Concentrazione;
+                }
+            }
+        }
+    }
+
+    return results;
+}
+
+export { loadAndTransformData, loadCountrySpecificData, loadAQIData, loadEVData  };

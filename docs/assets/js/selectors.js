@@ -1,8 +1,21 @@
-// selectors.js
+// File: pollutantPlots.js
+// Description: D3 selectors for DOM elements in the HTML file.
 
 export const pollutantSelect = d3.select("#pollutant-select");
+
 export const flashcard = d3.select("#pollutant-info");
 export const tooltip = d3.select(".tooltip");
+export const themeToggleButton = d3.select("#theme-toggle-button");
+export const currentYearFooterSpan = d3.select("#current-year-footer");
+
+export const heatmapContainerEurope = d3.select("#heatmap-container-europe");
+export const heatmapTimeframeSelect = d3.select("#heatmap-timeframe-select");
+export const heatmapLegendContainer = d3.select("#heatmap-legend-europe");
+export const heatmapRadiusSlider = d3.select("#heatmap-radius-slider");
+export const heatmapRadiusValue = d3.select("#heatmap-radius-value");
+export const heatmapBlurSlider = d3.select("#heatmap-blur-slider");
+export const heatmapBlurValue = d3.select("#heatmap-blur-value");
+export const mapTooltip = d3.select("#map-tooltip");
 
 export const chartContainer = d3.select("#bar-chart");
 export const chartLoader = d3.select("#chart-loader");
@@ -32,5 +45,4 @@ export const evCountrySelect1 = d3.select("#ev-country-select-1");
 export const evCountrySelect2 = d3.select("#ev-country-select-2");
 export const evAirQualityChartContainer = d3.select("#ev-air-quality-chart-container");
 export const evAirQualityChartDiv = d3.select("#ev-air-quality-chart");
-export const evChartTooltip = d3.select("#ev-chart-tooltip");
 export const evChartLegendContainer = d3.select("#ev-chart-legend");

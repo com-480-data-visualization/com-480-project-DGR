@@ -60,12 +60,7 @@ mark {
 	color: inherit;
 }
 
-input::-moz-focus-inner {
-	border: 0;
-	padding: 0;
-}
-
-input, select, textarea {
+select, textarea {
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	-ms-appearance: none;
@@ -499,7 +494,7 @@ input, select, textarea {
 
 /* Type */
 
-	body, input, textarea, select {
+	body, textarea, select {
 		font-family: "Source Sans Pro", "sans-serif";
 		font-weight: 300;
 		font-size: 18pt;
@@ -510,7 +505,7 @@ input, select, textarea {
 
 		@media screen and (max-width: 1920px) {
 
-			body, input, textarea, select {
+			body, textarea, select {
 				font-size: 17pt;
 			}
 

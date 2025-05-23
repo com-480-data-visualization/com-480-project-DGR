@@ -1,3 +1,5 @@
+// Code for the dynamic typing effect on the introduction text
+
 const intro = [
     "Welcome to SmogSense - your interactive guide to understanding the unseen air pollution in Europe.",
     "Our website aims to offer an engaging exploration of air quality across Europe, showcasing the evolution of pollution levels over the past two decades and projecting future trends based on real-time data.",
@@ -10,7 +12,6 @@ let animationFrameRequest;
 
 function typeWriter(text, elementId, callback) {
     let i = 0;
-    console.log(elementId)
     const element = document.getElementById(elementId);
     element.textContent = '';
     

@@ -1,469 +1,689 @@
-/* style.css - V7 */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
     --font-primary: 'Inter', sans-serif;
-    --bg-gradient-start: #f8fafc;
-    --bg-gradient-end: #f1f5f9;
-    --container-bg: #ffffff;
-    --text-primary: #1e293b; /* Slate 800 */
-    --text-secondary: #475569; /* Slate 600 */
-    --text-muted: #64748b; /* Slate 500 */
-    --text-accent: #3b82f6; /* Blue 500 */
-    --text-accent-dark: #2563eb; /* Blue 600 */
-    --border-color: #e2e8f0; /* Slate 200 */
-    --border-color-light: #f1f5f9; /* Slate 100 */
-    --shadow-color: rgba(59, 130, 246, 0.1);
+    --base-font-size: 18px;
+    --small-font-size: 0.90em;
+    --smaller-font-size: 0.95em;
+    --label-font-size: 1.05em;
+    --axis-text-font-size: 14.5px;
+    --tooltip-font-size: 1em;
+     --h1-font-size: 2.4em;
+     --h2-font-size: 2em;
+     --h3-font-size: 1.6em;
+     --h4-font-size: 1.3em;
+
+    --bg-primary: #f8fafc;
+    --bg-secondary: #f1f5f9;
+    --bg-container: #ffffff;
+    --bg-control: #f8fafc;
+    --bg-chart: #ffffff;
+    --bg-tooltip: rgba(20, 20, 30, 0.92);
+    --bg-map-tooltip: rgba(255, 255, 255, 0.95);
+    --bg-popup: #ffffff;
+    --bg-on-element-label-dark: rgba(25, 35, 50, 0.95);
+    --bg-on-element-label-blue: var(--text-accent-dark);
+
+
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --text-accent: #3b82f6;
+    --text-accent-dark: #2563eb;
+    --text-on-accent: #ffffff;
+    --text-tooltip: #f0f0f5;
+    --text-tooltip-strong: #ffffff;
+    --text-map-tooltip: #1e293b;
+    --text-on-element-label: #f8fafc;
+
+    --border-primary: #e2e8f0;
+    --border-secondary: #f1f5f9;
+    --border-accent: var(--text-accent);
+    --border-map-tooltip: #cbd5e1;
+    --border-popup: var(--border-primary);
+
+
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.07);
-    --flashcard-bg: #fcfdff; /* Slightly off-white for flashcard */
-    --flashcard-border: var(--border-color);
+    --shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.25);
+
+    --flashcard-bg: #fdfdfe;
+    --flashcard-border: var(--border-primary);
     --flashcard-title: var(--text-primary);
     --flashcard-label: var(--text-accent-dark);
-    --guideline-color: #ef4444; /* Red 500 for WHO guidelines */
-    --guideline-text-color: #dc2626; /* Red 600 for WHO text */
+
+    --guideline-color: #ef4444;
+    --guideline-text-color: #dc2626;
     --loader-color: var(--text-accent);
-    --control-bg: #f8fafc; /* Light gray for control backgrounds */
-    --chart-bg: #ffffff;
-    --chart-border: var(--border-color);
 
-    /* Tooltip (Global - from V26_user style, slightly adapted) */
-    --tooltip-bg-v26: rgba(20, 20, 30, 0.92); /* Darker as per V26 */
-    --tooltip-text-v26: #f0f0f5;
-    --tooltip-value-v26: #a7ddff; /* Light blue for value */
-
-    /* On-element hover labels (V7 new/updated) */
-    --on-element-label-bg-dark: rgba(25, 35, 50, 0.95); /* Dark for overview, consistent with image */
-    --on-element-label-bg-blue: var(--text-accent-dark); /* Blue for lollipop */
-    --on-element-label-text: #f8fafc; /* White text for both */
-    --on-element-label-padding: 6px 10px;
-    --on-element-label-radius: 5px;
-    --on-element-label-font-size: 12px;
-
-
-    /* Slider (from V26_user style) */
     --slider-thumb-bg: var(--text-accent);
-    --slider-track-bg: var(--border-color);
+    --slider-track-bg: var(--border-primary);
     --slider-track-active-bg: var(--text-accent-dark);
 
-    /* Lollipop Styles (V6 refined) */
-    --lollipop-line-color: #cbd5e1; /* Slate 300 */
+    --lollipop-line-color: #cbd5e1;
     --lollipop-line-hover-color: var(--text-accent);
     --lollipop-dot-color: var(--text-accent);
-    --lollipop-dot-stroke: var(--chart-bg);
-    --lollipop-dot-radius: 5px;
-    --lollipop-dot-hover-radius: 7px;
+    --lollipop-dot-stroke: var(--bg-chart);
+    --lollipop-dot-stroke-width: 2px;
+    --lollipop-dot-radius: 5.5px;
+    --lollipop-dot-hover-radius: 7.5px;
+    --on-element-label-padding: 6px 10px;
+    --on-element-label-radius: 5px;
+    --on-element-label-font-size: 12.5px;
 
-    /* Chart specific (general, can be overridden by V26_user styles for specific charts) */
     --axis-text-color: var(--text-secondary);
-    --axis-line-color: #cbd5e1; /* Slate 300 */
-    --grid-line-color: #e2e8f0; /* Slate 200 */
-    --grid-line-style: 2, 3; /* Default dash array for grids */
-    --grid-line-style-dense: 1, 2; /* Denser dash array */
-    --zero-line-color: #94a3b8; /* Slate 400 for zero lines */
+    --axis-line-color: #cbd5e1;
+    --grid-line-color: var(--border-primary);
+    --grid-line-style: 2, 3;
+    --grid-line-style-dense: 1, 2;
+    --zero-line-color: #94a3b8;
     --year-overlay-color: var(--text-muted);
-    --dist-bar-positive: var(--text-accent); /* For Z-score chart */
-    --dist-bar-negative: #f43f5e; /* Rose 500 for Z-score negative */
+
+    --dist-bar-positive: var(--text-accent);
+    --dist-bar-negative: #f43f5e;
     --dist-bar-radius: 3px;
-    --line-stroke-width: 2.5px; /* Default for evolution lines */
-    --point-radius: 4px; /* Default for evolution points */
+
+    --line-stroke-width: 2.5px;
+    --point-radius: 4px;
     --point-hover-radius: 6.5px;
     --point-click-radius: 6px;
-    --point-stroke-color: var(--chart-bg);
+    --point-stroke-color: var(--bg-chart);
     --point-click-stroke: var(--text-accent-dark);
 
-
-    /* AQI Popup Colors (from V26_user style) */
     --aqi-good-bg: #e0f2fe; --aqi-good-icon: #0284c7; --aqi-good-text: #0369a1;
     --aqi-moderate-bg: #fef9c3; --aqi-moderate-icon: #ca8a04; --aqi-moderate-text: #a16207;
-    --aqi-unhealthy-s-bg: #fee2e2; --aqi-unhealthy-s-icon: #f87171; --aqi-unhealthy-s-text: #ef4444;
+    --aqi-unhealthy-s-bg: #fee2e2; --aqi-unhealthy-s-icon: #f87171; --aqi-unhealthy-s-s-text: #ef4444;
     --aqi-unhealthy-bg: #fecaca; --aqi-unhealthy-icon: #dc2626; --aqi-unhealthy-text: #b91c1c;
+    --aqi-very-unhealthy-bg: #fbcfe8; --aqi-very-unhealthy-icon: #c026d3; --aqi-very-unhealthy-text: #a21caf;
+    --aqi-hazardous-bg: #e9d5ff; --aqi-hazardous-icon: #7e22ce; --aqi-hazardous-text: #6b21a8;
     --aqi-unknown-bg: #e5e7eb; --aqi-unknown-icon: #6b7280; --aqi-unknown-text: #4b5563;
 
-    /* Transitions */
     --transition-fast: 0.2s ease-out;
     --transition-medium: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --transition-slow: 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.visuals-container { padding: 25 35px; border-radius: 12px; max-width: 1280px; width: 100%; display: flex; flex-direction: column; align-items: stretch; opacity: 0; transform: translateY(10px); animation: fadeInContainer 0.6s 0.15s ease-out forwards; margin: 30px 0;}
-@keyframes fadeInContainer { to { opacity: 1; transform: translateY(0); } }
-.visuals-container header { text-align: center; margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
-.visuals-container h1 { color: var(--text-primary); margin-bottom: 12px; font-size: 2em; font-weight: 700; letter-spacing: -0.4px; display: inline-flex; align-items: center; gap: 10px; }
-.visuals-container h1 i { color: var(--text-accent); font-size: 0.9em; }
+html[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-container: #172033;
+    --bg-control: #293548;
+    --bg-chart: #1e293b;
+    --bg-tooltip: rgba(240, 240, 245, 0.92);
+    --bg-map-tooltip: rgba(30, 41, 59, 0.95);
+    --bg-popup: #1e293b;
+    --bg-on-element-label-dark: rgba(240, 245, 250, 0.95);
+    --bg-on-element-label-blue: var(--text-accent);
 
-/* Controls General (from V26_user) */
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-accent: #60a5fa;
+    --text-accent-dark: #3b82f6;
+    --text-on-accent: #0f172a;
+    --text-tooltip: #1e293b;
+    --text-tooltip-strong: #0f172a;
+    --text-map-tooltip: #f1f5f9;
+    --text-on-element-label: #172033;
+
+    --border-primary: #334155;
+    --border-secondary: #293548;
+    --border-map-tooltip: #475569;
+    --border-popup: var(--border-primary);
+
+    --shadow-focus: 0 0 0 3px rgba(96, 165, 250, 0.3);
+
+    --flashcard-bg: #1e293b;
+    --flashcard-border: var(--border-primary);
+
+    --slider-thumb-bg: var(--text-accent);
+    --slider-track-bg: var(--border-primary);
+    --slider-track-active-bg: var(--text-accent-dark);
+
+    --lollipop-dot-stroke: var(--bg-chart);
+
+    --axis-text-color: var(--text-secondary);
+    --axis-line-color: #475569;
+    --grid-line-color: #334155;
+    --zero-line-color: #64748b;
+    --year-overlay-color: var(--text-muted);
+
+    --dist-bar-positive: var(--text-accent);
+    --dist-bar-negative: #fb7185;
+
+    --point-stroke-color: var(--bg-chart);
+    --point-click-stroke: var(--text-accent-dark);
+
+    --aqi-good-bg: #064e3b; --aqi-good-icon: #6ee7b7; --aqi-good-text: #a7f3d0;
+    --aqi-moderate-bg: #713f12; --aqi-moderate-icon: #facc15; --aqi-moderate-text: #fde68a;
+    --aqi-unhealthy-s-bg: #7c2d12; --aqi-unhealthy-s-icon: #fb923c; --aqi-unhealthy-s-text: #fed7aa;
+    --aqi-unhealthy-bg: #7f1d1d; --aqi-unhealthy-icon: #f87171; --aqi-unhealthy-text: #fecaca;
+    --aqi-very-unhealthy-bg: #701a75; --aqi-very-unhealthy-icon: #f0abfc; --aqi-very-unhealthy-text: #f5d0fe;
+    --aqi-hazardous-bg: #581c87; --aqi-hazardous-icon: #d8b4fe; --aqi-hazardous-text: #e9d5ff;
+    --aqi-unknown-bg: #374151; --aqi-unknown-icon: #9ca3af; --aqi-unknown-text: #d1d5db;
+}
+
+@keyframes fadeInContainer { to { opacity: 1; transform: translateY(0); } }
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--border-primary);
+    padding-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.legend-color-box {
+    width: 24px;
+    height: 8px;
+    margin-right: 8px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.header-content { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%; 
+}
+
+h1 { 
+    color: var(--text-primary); 
+    margin-bottom: 0; 
+    margin-left: auto; 
+    font-size: 2.05em; 
+    font-weight: 700; 
+    letter-spacing: -0.4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s;
+}
+
+h1 i { 
+    color: var(--text-accent); 
+    font-size: 0.9em;
+    transition: color 0.3s;
+}
+
+input[type="checkbox"] { 
+    margin-right: 3px;
+}
+
+.theme-toggle { 
+    margin-left: auto; 
+    background: none; 
+    border: 1px solid var(--border-primary); 
+    border-radius: 50%; 
+    width: 38px; 
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.theme-toggle:hover { 
+    color: var(--text-accent);
+    border-color: var(--text-accent);
+    background-color: var(--bg-secondary); 
+}
+
+.theme-toggle i {
+    font-size: 1.1em;
+}
+
 .controls-container { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px 25px; margin-top: 15px; }
-header .controls-container { margin-top: 15px; }
-.control-group { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-.control-group label { font-weight: 500; color: var(--text-secondary); font-size: 0.85em; }
-.select-wrapper { position: relative; display: inline-block; }
-select#pollutant-select, select#country-select, select#city-pollutant-select { padding: 9px 38px 9px 14px; border: 1px solid var(--border-color); border-radius: 7px; font-size: 0.9em; font-family: var(--font-primary); appearance: none; -webkit-appearance: none; -moz-appearance: none; background-color: #fff; cursor: pointer; min-width: 260px; max-width: 100%; transition: border-color var(--transition-fast), box-shadow var(--transition-fast); background-image: none; color: var(--text-primary); }
-select#pollutant-select:hover, select#country-select:hover, select#city-pollutant-select:hover { border-color: var(--text-accent); }
-select#pollutant-select:focus, select#country-select:focus, select#city-pollutant-select:focus { outline: none; border-color: var(--text-accent); box-shadow: 0 0 0 2.5px var(--shadow-color); }
+.control-group { display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
+.control-group label { font-weight: 500; color: var(--text-secondary); font-size: var(--label-font-size); text-align: left; transition: color 0.3s; }
+.select-wrapper { position: relative; display: inline-block; width: 100%; }
+select { padding: 9px 38px 9px 14px; border: 1px solid var(--border-primary); border-radius: 7px; font-size: 0.92em; font-family: var(--font-primary); appearance: none; -webkit-appearance: none; -moz-appearance: none; background-color: var(--bg-container); cursor: pointer; width: 100%; transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color 0.3s, color 0.3s; background-image: none; color: var(--text-primary); }
+select:hover { border-color: var(--border-accent); }
+select:focus { outline: none; border-color: var(--border-accent); box-shadow: var(--shadow-focus); }
 .select-wrapper svg { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); fill: var(--text-muted); width: 16px; height: 16px; pointer-events: none; transition: fill var(--transition-fast); }
 .select-wrapper:hover svg { fill: var(--text-accent); }
-.select-wrapper.small-select select { min-width: 180px; font-size: 0.85em; padding: 7px 32px 7px 10px; }
+.select-wrapper.small-select select { min-width: 180px; font-size: var(--small-font-size); padding: 7px 32px 7px 10px; }
 .select-wrapper.small-select svg { right: 10px; width: 14px; height: 14px; }
 .city-chart-controls { margin-bottom: 12px; width: 100%; display: flex; justify-content: center; padding-right: 0; }
 .city-chart-controls .control-group { display: flex; flex-direction: column; align-items: center; gap: 3px; }
 .city-chart-controls .control-group label { text-align: center; width: 100%;}
 
-/* Sezione Overview (V26_user base, V7 hover label) */
+input[type="range"] { flex-grow: 1; width: 100%; height: 6px; cursor: pointer; appearance: none; background: var(--slider-track-bg); border-radius: 3px; transition: background var(--transition-fast); margin-top: 4px; }
+input[type="range"]:hover { background: var(--border-primary); }
+input[type="range"]::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; background: var(--slider-thumb-bg); border-radius: 50%; cursor: pointer; transition: background var(--transition-fast); border: 2px solid var(--bg-container); }
+input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; background: var(--slider-thumb-bg); border-radius: 50%; border: 2px solid var(--bg-container); cursor: pointer; transition: background var(--transition-fast); }
+input[type="range"]::-webkit-slider-thumb:hover, input[type="range"]::-moz-range-thumb:hover { background: var(--slider-track-active-bg); }
+input[type="range"]:focus { outline: none; }
+input[type="range"]:focus::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--bg-container), 0 0 0 5px var(--text-accent); }
+input[type="range"]:focus::-moz-range-thumb { box-shadow: 0 0 0 3px var(--bg-container), 0 0 0 5px var(--text-accent); }
+.control-group label span { font-weight: 600; color: var(--text-primary); transition: color 0.3s; font-size: 0.95em; }
+
+section#europe-heatmap-section { display: flex; flex-direction: column; gap: 15px; width: 100%; margin-top: 5px; margin-bottom: 20px; }
+section#europe-heatmap-section > h2 { margin: 0 0 5px 0; font-size: 1.55em; color: var(--text-primary); font-weight: 600; border-bottom: 1px solid var(--border-secondary); padding-bottom: 10px; display: flex; align-items: center; gap: 8px; transition: color 0.3s, border-color 0.3s; }
+section#europe-heatmap-section > h2 i { color: #e74c3c; font-size: 0.9em; }
+.heatmap-controls { display: flex; justify-content: space-around; padding-bottom: 10px; margin-top: 0; width: 100%; gap: 20px; }
+.heatmap-controls .control-group { flex: 1; min-width: 180px; max-width: 250px; }
+
+.map-legend-wrapper { display: flex; flex-direction: row; gap: 20px; align-items: stretch; width: 100%; }
+#heatmap-container-europe { flex-grow: 1; min-width: 0; height: 550px; background-color: var(--bg-secondary); border-radius: 10px; border: 1px solid var(--border-primary); box-shadow: var(--shadow-md); display: flex; justify-content: center; align-items: center; color: var(--text-muted); position: relative; overflow: hidden; transition: background-color 0.3s, border-color 0.3s; }
+#heatmap-container-europe .placeholder-text { position: static; transform: none; font-size: var(--small-font-size); padding: 20px; }
+#heatmap-container-europe .leaflet-container { border-radius: 10px; }
+
+#heatmap-legend-europe { flex-basis: 230px; flex-shrink: 0; padding: 15px; background-color: var(--bg-control); border-radius: 8px; border: 1px solid var(--border-primary); box-shadow: var(--shadow-md); display: flex; flex-direction: column; gap: 8px; align-self: flex-start; max-height: 550px; overflow-y: auto; transition: background-color 0.3s, border-color 0.3s; }
+#heatmap-legend-europe h4 { margin: 0 0 10px 0; font-size: 1.05em; font-weight: 600; color: var(--text-primary); padding-bottom: 8px; border-bottom: 1px solid var(--border-secondary); text-align: center; transition: color 0.3s, border-color 0.3s; }
+.heatmap-legend-item { display: flex; align-items: center; gap: 10px; font-size: var(--small-font-size);  color: var(--text-secondary); padding: 4px 6px; transition: background-color 0.15s ease-out; border-radius: 4px; cursor: default; }
+.heatmap-legend-item:hover { background-color: var(--border-secondary); }
+html[data-theme="dark"] .heatmap-legend-item:hover { background-color: var(--border-primary); }
+.heatmap-legend-item .legend-color-box { width: 18px; height: 18px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.1); flex-shrink: 0; }
+html[data-theme="dark"] .heatmap-legend-item .legend-color-box { border-color: rgba(255,255,255,0.15); }
+.heatmap-legend-item .legend-text { flex-grow: 1; transition: color 0.3s; }
+
+.map-custom-tooltip {
+    position: absolute;
+    background-color: var(--bg-map-tooltip);
+    color: var(--text-map-tooltip);
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-map-tooltip);
+    font-size: var(--small-font-size);
+    box-shadow: var(--shadow-md);
+    pointer-events: none;
+    z-index: 1002;
+    white-space: nowrap;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+
 main#overview-visualization { display: flex; flex-wrap: wrap; gap: 35px; width: 100%; align-items: flex-start; margin-top: 5px; }
+main#overview-visualization > .controls-container { margin-bottom: 20px; width:100%;}
 #visualization-area { flex: 5; min-width: 480px; display: flex; flex-direction: column; gap: 12px; }
-#bar-chart-container { width: 100%; position: relative; border-radius: 10px; background-color: var(--chart-bg); border: 1px solid var(--chart-border); box-shadow: var(--shadow-md); }
-#bar-chart { width: 100%; padding: 20px 25px; border-radius: 10px; position: relative; min-height: 360px; } /* V26 min-height */
-#bar-chart svg { display: block; width: 100%; height: auto; max-height: 430px; overflow: visible; } /* max-height V26, overflow visible for label */
-.chart-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.8); display: flex; justify-content: center; align-items: center; font-size: 1em; color: var(--loader-color); border-radius: 10px; z-index: 5; transition: opacity var(--transition-fast); }
+#bar-chart-container { width: 100%; position: relative; border-radius: 10px; background-color: var(--bg-chart); border: 1px solid var(--border-primary); box-shadow: var(--shadow-md); transition: background-color 0.3s, border-color 0.3s; }
+#bar-chart { width: 100%; padding: 20px 25px; border-radius: 10px; position: relative; min-height: 360px; }
+#bar-chart svg { display: block; width: 100%; height: auto; max-height: 430px; overflow: visible; }
+.chart-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.8); display: flex; justify-content: center; align-items: center; font-size: 1.05em; color: var(--loader-color); border-radius: 10px; z-index: 5; transition: opacity var(--transition-fast), background-color 0.3s; }
+html[data-theme="dark"] .chart-overlay { background-color: rgba(30, 41, 59, 0.8); }
 .chart-overlay i { margin-right: 8px; animation: spin 1.5s linear infinite; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-/* Timelapse Controls (from V26_user) */
-.timelapse-controls { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 8px 12px; background-color: var(--control-bg); border-radius: 7px; border: 1px solid var(--border-color); }
-#play-pause-button { background: none; border: 1px solid var(--border-color); border-radius: 50%; padding: 0; width: 34px; height: 34px; cursor: pointer; color: var(--text-accent); display: flex; justify-content: center; align-items: center; flex-shrink: 0; transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast); }
-#play-pause-button:hover { background-color: var(--text-accent-dark); color: white; border-color: var(--text-accent-dark); box-shadow: 0 1px 3px var(--shadow-color); }
+.timelapse-controls { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 8px 12px; background-color: var(--bg-control); border-radius: 7px; border: 1px solid var(--border-primary); transition: background-color 0.3s, border-color 0.3s; }
+#play-pause-button { background: none; border: 1px solid var(--border-primary); border-radius: 50%; padding: 0; width: 34px; height: 34px; cursor: pointer; color: var(--text-accent); display: flex; justify-content: center; align-items: center; flex-shrink: 0; transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast); }
+#play-pause-button:hover { background-color: var(--text-accent-dark); color: var(--text-on-accent); border-color: var(--text-accent-dark); box-shadow: 0 1px 3px var(--shadow-sm); }
 #play-pause-button i { font-size: 0.8em; pointer-events: none; }
 .year-selection-group { display: flex; align-items: center; gap: 8px; flex-grow: 1; justify-content: center; }
-.year-selection-group .control-label { font-size: 0.9em; color: var(--text-secondary); font-weight: 500; white-space: nowrap; }
-#year-slider-value { font-weight: 600; color: var(--text-primary); min-width: 3ch; text-align: left; }
-#year-slider { flex-grow: 1; max-width: 380px; height: 5px; cursor: pointer; appearance: none; background: var(--slider-track-bg); border-radius: 2.5px; transition: background var(--transition-fast); }
-#year-slider:hover { background: var(--border-color); }
-#year-slider::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; background: var(--slider-thumb-bg); border-radius: 50%; cursor: pointer; transition: background var(--transition-fast); }
-#year-slider::-moz-range-thumb { width: 16px; height: 16px; background: var(--slider-thumb-bg); border-radius: 50%; border: none; cursor: pointer; transition: background var(--transition-fast); }
-#year-slider::-webkit-slider-thumb:hover, #year-slider::-moz-range-thumb:hover { background: var(--text-accent-dark); }
-#year-slider:focus { outline: none; box-shadow: 0 0 0 2.5px var(--shadow-color); border-radius: 2.5px; }
-#year-slider:focus::-webkit-slider-thumb { box-shadow: 0 0 0 1.5px white, 0 0 0 3px var(--text-accent); }
-#year-slider:focus::-moz-range-thumb { box-shadow: 0 0 0 1.5px white, 0 0 0 3px var(--text-accent); }
-.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+.year-selection-group .control-label { font-size: 0.92em; color: var(--text-secondary); font-weight: 500; white-space: nowrap; transition: color 0.3s;}
+#year-slider-value { font-weight: 600; color: var(--text-primary); min-width: 3ch; text-align: left; transition: color 0.3s; font-size: 0.92em; }
 
-/* Overview Bar Chart - Bar Element & On-Bar Hover Label (V7) */
-.bar { transition: fill var(--transition-fast), opacity var(--transition-fast), filter var(--transition-fast), width var(--transition-medium), x var(--transition-medium), y var(--transition-medium); opacity: 1; cursor: pointer; rx: var(--dist-bar-radius); ry: var(--dist-bar-radius); filter: brightness(1); }
-.bar:hover { filter: brightness(0.85); } /* Consistent hover effect */
-
-.on-bar-hover-label { /* For Overview Chart - label ABOVE bar */
-    opacity: 0;
-    transition: opacity 0.1s ease-out; /* Faster fade for responsiveness */
-    pointer-events: none;
-    font-family: var(--font-primary);
-    z-index: 10; /* Ensure it's above bars */
-}
-.on-bar-hover-label rect {
-    fill: var(--on-element-label-bg-dark);
-    rx: var(--on-element-label-radius);
-    ry: var(--on-element-label-radius);
-}
-.on-bar-hover-label text {
-    fill: var(--on-element-label-text);
-    font-size: var(--on-element-label-font-size);
-    font-weight: 500;
-    text-anchor: middle;
-    dominant-baseline: middle;
-}
-
-/* Overview Chart Axes (from V26_user) */
-#bar-chart .axis .domain { stroke: var(--axis-line-color); stroke-width: 1px; }
-#bar-chart .axis text { font-size: 12px; font-weight: 500; fill: var(--text-secondary); } /* V26 font size/color */
-#bar-chart .y-axis .tick text { font-size: 12.5px; fill: var(--text-primary); } /* V26 styling for Y axis country names */
-#bar-chart .x-axis .tick text { font-size: 11.5px; font-weight: 400; }
-#bar-chart .axis-label { font-size: 12.5px; fill: var(--text-primary); font-weight: 500; } /* V26 axis label */
-#bar-chart .axis .tick line { stroke: var(--grid-line-color); stroke-dasharray: var(--grid-line-style); stroke-width: 1px; opacity: 0.6; } /* V26 opacity */
-
-.guideline-group line { stroke: var(--guideline-color); stroke-width: 1.2px; stroke-dasharray: 3, 3; opacity: 0.75; } /* V26 guideline line */
-.guideline-group text { fill: var(--guideline-text-color); font-size: 9.5px; font-weight: 500; text-anchor: middle; opacity: 0.9; paint-order: stroke; stroke: white; stroke-width: 2.5px; } /* V26 guideline text */
-.year-overlay-text { font-size: 2.8em; font-weight: 700; fill: var(--year-overlay-color); opacity: 0.6; text-anchor: end; dominant-baseline: auto; pointer-events: none; transition: opacity var(--transition-fast); paint-order: stroke; stroke: rgba(255, 255, 255, 0.75); stroke-width: 3.5px; } /* V26 year overlay */
-
-/* Flashcard (from V26_user) */
-.flashcard { flex: 3; min-width: 280px; padding: 25px; border: 1px solid var(--flashcard-border); border-radius: 10px; background: var(--flashcard-bg); box-shadow: var(--shadow-md); transition: opacity var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium); opacity: 1; transform: translateY(0) scale(1); align-self: flex-start; }
-.flashcard:hover { box-shadow: var(--shadow-lg); transform: translateY(-1px) scale(1.005); }
+/* Flashcard */
+.flashcard { flex: 3; min-width: 280px; padding: 25px; border: 1px solid var(--flashcard-border); border-radius: 10px; background: var(--flashcard-bg); box-shadow: var(--shadow-md); transition: opacity var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium), background-color 0.3s, border-color 0.3s; opacity: 1; transform: translateY(0) scale(1); align-self: flex-start; }
+.flashcard:hover { box-shadow: var(--shadow-lg); transform: translateY(-1.5px) scale(1.005); }
 .flashcard.updating { opacity: 0.5; transform: scale(0.98); pointer-events: none; }
 .flashcard.updating > * { opacity: 0.6; }
-.flashcard h2 { margin-top: 0; color: var(--flashcard-title); margin-bottom: 20px; font-size: 1.3em; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-.flashcard h2 i { font-size: 0.9em; color: var(--text-accent); }
-.flashcard p { margin-bottom: 15px; font-size: 0.9em; line-height: 1.65; color: var(--text-secondary); }
-.flashcard .label { font-weight: 600; color: var(--flashcard-label); margin-right: 6px; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 5px; font-size: 0.85em; text-transform: none; letter-spacing: 0.1px; display: block; }
-.flashcard .label i { width: 1.1em; text-align: center; opacity: 0.85; color: var(--text-accent-dark); }
-.flashcard span:not(.label) { color: var(--text-primary); display: block; font-size: 0.9em; padding-left: 0; margin-top: -1.5px; }
+.flashcard h2 { margin-top: 0; color: var(--flashcard-title); margin-bottom: 20px; font-size: 1.35em; border-bottom: 1px solid var(--border-secondary); padding-bottom: 10px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: color 0.3s, border-color 0.3s;}
+.flashcard h2 i { font-size: 0.9em; color: var(--text-accent); transition: color 0.3s;}
+.flashcard p { margin-bottom: 15px; font-size: 0.92em; line-height: 1.65; color: var(--text-secondary); transition: color 0.3s;}
+.flashcard .label { font-weight: 600; color: var(--flashcard-label); margin-right: 6px; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 5px; font-size: var(--small-font-size); text-transform: none; letter-spacing: 0.1px; display: block; transition: color 0.3s;}
+.flashcard .label i { width: 1.1em; text-align: center; opacity: 0.85; color: var(--text-accent-dark); transition: color 0.3s;}
+.flashcard span:not(.label) { color: var(--text-primary); display: block; font-size: 0.92em; padding-left: 0; margin-top: -1.5px; transition: color 0.3s;}
 
-hr.section-divider { border: none; border-top: 1px dashed var(--border-color); margin: 30px 0; }
+hr.section-divider { border: none; border-top: 1px dashed var(--border-primary); margin: 30px 0; transition: border-color 0.3s;}
 
-/* Country View Section (from V26_user) */
+/* Country View Section */
 section#country-view { display: flex; flex-direction: column; gap: 18px; width: 100%; margin-top: 5px; }
-section#country-view > h2 { margin: 0 0 3px 0; font-size: 1.5em; color: var(--text-primary); font-weight: 600; border-bottom: 1px solid var(--border-color-light); padding-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-section#country-view > h2 i { color: var(--text-accent-dark); font-size: 0.9em; }
+section#country-view > h2 { margin: 0 0 3px 0; font-size: 1.55em; color: var(--text-primary); font-weight: 600; border-bottom: 1px solid var(--border-secondary); padding-bottom: 10px; display: flex; align-items: center; gap: 8px; transition: color 0.3s, border-color 0.3s;}
+section#country-view > h2 i { color: var(--text-accent-dark); font-size: 0.9em; transition: color 0.3s;}
 .country-controls { display: flex; justify-content: center; padding-bottom: 12px; margin-top: 0; width: 100%; gap: 0; flex-wrap: nowrap; }
 .country-controls .control-group { display: flex; flex-direction: column; align-items: center; gap: 5px; }
 .country-controls .control-group label { text-align: center; width: 100%;}
 #country-visualization-content { opacity: 1; max-height: 5000px; transition: opacity 0.35s ease-out, max-height 0.45s ease-out, transform 0.35s ease-out; overflow: hidden; position: relative; transform: translateY(0); }
 #country-visualization-content.hidden { opacity: 0; max-height: 0 !important; margin-top: -18px; padding-top: 0; padding-bottom: 0; border: none; pointer-events: none; overflow: hidden; transform: translateY(-8px); }
 .country-details-container { display: flex; flex-wrap: wrap; gap: 25px; width: 100%; }
-#country-map-section, #country-stats-section { flex: 1; min-width: 330px; background-color: var(--chart-bg); padding: 18px 22px; border-radius: 10px; border: 1px solid var(--chart-border); box-shadow: var(--shadow-md); display: flex; flex-direction: column; transition: opacity 0.45s ease-out, transform 0.45s ease-out, box-shadow var(--transition-medium); }
+#country-map-section, #country-stats-section { flex: 1; min-width: 330px; background-color: var(--bg-chart); padding: 18px 22px; border-radius: 10px; border: 1px solid var(--border-primary); box-shadow: var(--shadow-md); display: flex; flex-direction: column; transition: opacity 0.45s ease-out, transform 0.45s ease-out, box-shadow var(--transition-medium), background-color 0.3s, border-color 0.3s; }
 #country-map-section:hover, #country-stats-section:hover { box-shadow: var(--shadow-lg); transform: translateY(-1.5px); }
-#country-map-section h3, #country-stats-section h3 { margin-top: 0; margin-bottom: 12px; font-size: 1.15em; color: var(--text-primary); border-bottom: 1px solid var(--border-color-light); padding-bottom: 8px; font-weight: 600; display: flex; align-items: center; gap: 7px; }
-#country-map-section h3 i, #country-stats-section h3 i { color: var(--text-accent); font-size: 0.9em; }
+#country-map-section h3, #country-stats-section h3 { margin-top: 0; margin-bottom: 12px; font-size: 1.2em; color: var(--text-primary); border-bottom: 1px solid var(--border-secondary); padding-bottom: 8px; font-weight: 600; display: flex; align-items: center; gap: 7px; transition: color 0.3s, border-color 0.3s;}
+#country-map-section h3 i, #country-stats-section h3 i { color: var(--text-accent); font-size: 0.9em; transition: color 0.3s;}
 
-/* Map (from V26_user) */
-#country-map { width: 100%; height: 400px; background-color: #f0f4f8; border-radius: 7px; border: 1px solid var(--border-color); display: flex; justify-content: center; align-items: center; color: var(--text-muted); flex-grow: 1; transition: background-color 0.25s; z-index: 0; overflow: hidden; }
+#country-map { width: 100%; height: 400px; background-color: var(--bg-secondary); border-radius: 7px; border: 1px solid var(--border-primary); display: flex; justify-content: center; align-items: center; color: var(--text-muted); flex-grow: 1; transition: background-color 0.3s, border-color 0.3s; z-index: 0; overflow: hidden; }
 .leaflet-container { font-family: var(--font-primary); border-radius: 7px; }
 .leaflet-marker-icon { filter: drop-shadow(1px 1px 1.5px rgba(0,0,0,0.25)); transition: transform 0.18s ease-out; }
 .leaflet-marker-icon:hover { transform: scale(1.08); }
 .error-text { color: #dc2626; font-weight: 500; }
-.leaflet-popup-content-wrapper { border-radius: 7px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); border: 1px solid var(--border-color); background: #fff; padding: 0; overflow: hidden; }
-.leaflet-popup-content { font-size: 12.5px; line-height: 1.45; margin: 0 !important; padding: 0 !important; display: flex; flex-direction: column; color: var(--text-secondary); min-width: 210px; }
-.leaflet-popup-tip-container { display: block; }
-.popup-header { padding: 8px 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(0,0,0,0.04); }
-.popup-aqi-icon { font-size: 1.4em; flex-shrink: 0; }
-.popup-aqi-category { font-size: 1em; font-weight: 600; }
-.popup-header.aqi-good { background-color: var(--aqi-good-bg); } .popup-header.aqi-good .popup-aqi-icon { color: var(--aqi-good-icon); } .popup-header.aqi-good .popup-aqi-category { color: var(--aqi-good-text); }
-.popup-header.aqi-moderate { background-color: var(--aqi-moderate-bg); } .popup-header.aqi-moderate .popup-aqi-icon { color: var(--aqi-moderate-icon); } .popup-header.aqi-moderate .popup-aqi-category { color: var(--aqi-moderate-text); }
-.popup-header.aqi-unhealthy-s { background-color: var(--aqi-unhealthy-s-bg); } .popup-header.aqi-unhealthy-s .popup-aqi-icon { color: var(--aqi-unhealthy-s-icon); } .popup-header.aqi-unhealthy-s .popup-aqi-category { color: var(--aqi-unhealthy-s-text); }
-.popup-header.aqi-unhealthy { background-color: var(--aqi-unhealthy-bg); } .popup-header.aqi-unhealthy .popup-aqi-icon { color: var(--aqi-unhealthy-icon); } .popup-header.aqi-unhealthy .popup-aqi-category { color: var(--aqi-unhealthy-text); }
-.popup-header.aqi-unknown { background-color: var(--aqi-unknown-bg); } .popup-header.aqi-unknown .popup-aqi-icon { color: var(--aqi-unknown-icon); } .popup-header.aqi-unknown .popup-aqi-category { color: var(--aqi-unknown-text); }
-.popup-body { padding: 10px 12px; }
-.popup-city-name { font-size: 1.1em; font-weight: 600; color: var(--text-primary); margin: 0 0 8px 0; }
-.popup-pollutant-list { list-style: none; padding: 0; margin: 0; }
-.popup-pollutant-item { display: flex; justify-content: space-between; align-items: center; padding: 3.5px 0; font-size: 0.85em; border-bottom: 1px solid var(--border-color-light); }
-.popup-pollutant-item:last-child { border-bottom: none; }
-.popup-pollutant-item .pollutant-name { font-weight: 500; color: var(--text-secondary); }
-.popup-pollutant-item .pollutant-value { font-weight: 500; color: var(--text-primary); }
-.popup-timestamp { font-size: 0.75em; color: var(--text-muted); text-align: right; margin-top: 6px; padding: 0 12px 6px 12px; }
+html[data-theme="dark"] .error-text { color: #fb7185; }
 
-/* Country Stats Charts (from V26_user, with V7 on-lollipop label) */
+.leaflet-popup-content-wrapper {
+    background: var(--bg-popup);
+    border: 1px solid var(--border-popup);
+    box-shadow: var(--shadow-md);
+    border-radius: 7px;
+    padding: 0;
+    overflow: hidden;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+.leaflet-popup-content {
+    color: var(--text-secondary);
+    font-size: 13px; /* Aumentato */
+    line-height: 1.45;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    min-width: 220px;
+    transition: color 0.3s;
+}
+.leaflet-popup-tip {
+    background: var(--bg-popup);
+    transition: background-color 0.3s;
+}
+
+.popup-header {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-secondary);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+.popup-aqi-icon { font-size: 1.4em; flex-shrink: 0; }
+.popup-aqi-category { font-size: 1.05em; font-weight: 600; }
+
+.popup-header.aqi-good { background-color: var(--aqi-good-bg); } .popup-header.aqi-good .popup-aqi-icon { color: var(--aqi-good-icon); } .popup-header.aqi-good .popup-aqi-category { color: var(--aqi-good-text); }
+.popup-header.aqi-moderate { background-color: var(--aqi-moderate-bg); } .popup-header.aqi-moderate .popup-aqi-icon { color: var(--aqi-moderate-icon); } .popup-header.aqi-moderate .popup-aqi-text { color: var(--aqi-moderate-text); }
+.popup-header.aqi-unhealthy-s { background-color: var(--aqi-unhealthy-s-bg); } .popup-header.aqi-unhealthy-s .popup-aqi-icon { color: var(--aqi-unhealthy-s-icon); } .popup-header.aqi-unhealthy-s .popup-aqi-text { color: var(--aqi-unhealthy-s-text); }
+.popup-header.aqi-unhealthy { background-color: var(--aqi-unhealthy-bg); } .popup-header.aqi-unhealthy .popup-aqi-icon { color: var(--aqi-unhealthy-icon); } .popup-header.aqi-unhealthy .popup-aqi-category { color: var(--aqi-unhealthy-text); }
+.popup-header.aqi-very-unhealthy { background-color: var(--aqi-very-unhealthy-bg); } .popup-header.aqi-very-unhealthy .popup-aqi-icon { color: var(--aqi-very-unhealthy-icon); } .popup-header.aqi-very-unhealthy .popup-aqi-category { color: var(--aqi-very-unhealthy-text); }
+.popup-header.aqi-hazardous { background-color: var(--aqi-hazardous-bg); } .popup-header.aqi-hazardous .popup-aqi-icon { color: var(--aqi-hazardous-icon); } .popup-header.aqi-hazardous .popup-aqi-category { color: var(--aqi-hazardous-text); }
+.popup-header.aqi-unknown { background-color: var(--aqi-unknown-bg); } .popup-header.aqi-unknown .popup-aqi-icon { color: var(--aqi-unknown-icon); } .popup-header.aqi-unknown .popup-aqi-category { color: var(--aqi-unknown-text); }
+
+.popup-body { padding: 10px 12px; }
+.popup-city-name { font-size: 1.15em; font-weight: 600; color: var(--text-primary); margin: 0 0 8px 0; transition: color 0.3s; }
+.popup-pollutant-list { list-style: none; padding: 0; margin: 0; }
+.popup-pollutant-item { display: flex; justify-content: space-between; align-items: center; padding: 3.5px 0; font-size: var(--small-font-size); border-bottom: 1px solid var(--border-secondary); transition: border-color 0.3s; }
+.popup-pollutant-item:last-child { border-bottom: none; }
+.popup-pollutant-item .pollutant-name { font-weight: 500; color: var(--text-secondary); transition: color 0.3s; }
+.popup-pollutant-item .pollutant-value { font-weight: 500; color: var(--text-primary); transition: color 0.3s; }
+.popup-timestamp { font-size: var(--smaller-font-size); color: var(--text-muted); text-align: right; margin-top: 6px; padding: 0 12px 6px 12px; transition: color 0.3s; }
+
+.bar, .dist-bar { cursor: pointer; transition: fill var(--transition-fast), opacity var(--transition-fast), filter var(--transition-fast), width var(--transition-medium), x var(--transition-medium), y var(--transition-medium), height var(--transition-medium); opacity: 1; filter: brightness(1); }
+.bar:hover, .dist-bar:hover { filter: brightness(0.85); }
+html[data-theme="dark"] .bar:hover, html[data-theme="dark"] .dist-bar:hover { filter: brightness(1.2); }
+
+.axis .domain { stroke: var(--axis-line-color); stroke-width: 1px; transition: stroke 0.3s; }
+.axis text { font-size: var(--axis-text-font-size); font-weight: 500; fill: var(--axis-text-color); transition: fill 0.3s; }
+.y-axis .tick text { font-size: calc(var(--axis-text-font-size) + 0.5px); fill: var(--text-primary); transition: fill 0.3s; }
+.x-axis .tick text { font-size: calc(var(--axis-text-font-size) - 0.5px); font-weight: 400; }
+#pollutant-distribution-chart .y-axis .tick text {
+    text-anchor: end !important;
+}
+.axis-label { font-size: calc(var(--axis-text-font-size) + 0.5px); fill: var(--text-primary); font-weight: 500; transition: fill 0.3s; }
+.axis .tick line { stroke: var(--grid-line-color); stroke-dasharray: var(--grid-line-style); stroke-width: 1px; opacity: 0.6; transition: stroke 0.3s; }
+
+.guideline-group line { stroke: var(--guideline-color); stroke-width: 1.2px; stroke-dasharray: 3, 3; opacity: 0.75; }
+.guideline-group text {
+    fill: var(--guideline-text-color);
+    font-size: calc(var(--smaller-font-size) + 0.5px);
+    font-weight: 500;
+    text-anchor: middle;
+    opacity: 0.9;
+    paint-order: stroke;
+    stroke: var(--bg-chart);
+    stroke-width: 2.5px;
+    transition: stroke 0.3s, fill 0.3s;
+}
+.year-overlay-text { font-size: 2.8em; font-weight: 700; fill: var(--year-overlay-color); opacity: 0.6; text-anchor: end; dominant-baseline: auto; pointer-events: none; transition: opacity var(--transition-fast), fill 0.3s, stroke 0.3s; paint-order: stroke; stroke: var(--bg-container); stroke-width: 3.5px; }
+
 .stats-chart-container { margin-bottom: 25px; }
 .stats-chart-container:last-child { margin-bottom: 0; }
-.stats-chart-container h4 { font-size: 1em; color: var(--text-primary); font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 7px; }
-.stats-chart-container h4 i { color: var(--text-accent-dark); font-size: 0.9em; }
-#pollutant-distribution-chart, #pollutant-evolution-chart, #city-comparison-chart { width: 100%; min-height: 250px; border: 1px solid var(--border-color-light); border-radius: 7px; padding: 12px 18px; background-color: #fff; position: relative; transition: opacity 0.25s ease-out; opacity: 1; overflow: visible; } /* V26 padding/radius, overflow visible for label */
-.placeholder-text { color: var(--text-muted); font-size: 0.85em; text-align: center; padding: 18px; width: 100%;}
-#pollutant-distribution-chart .placeholder-text, #pollutant-evolution-chart .placeholder-text, #city-comparison-chart .placeholder-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% - 36px); } /* V26 width calc */
+.stats-chart-container h4 { font-size: 1.05em; color: var(--text-primary); font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 7px; transition: color 0.3s; }
+.stats-chart-container h4 i { color: var(--text-accent-dark); font-size: 0.9em; transition: color 0.3s; }
+#pollutant-distribution-chart, #pollutant-evolution-chart, #city-comparison-chart { width: 100%; min-height: 250px; border: 1px solid var(--border-secondary); border-radius: 7px; padding: 12px 18px; background-color: var(--bg-container); position: relative; transition: opacity 0.25s ease-out, background-color 0.3s, border-color 0.3s; opacity: 1; overflow: visible; }
+.placeholder-text { color: var(--text-muted); font-size: var(--small-font-size); text-align: center; padding: 18px; width: 100%; transition: color 0.3s;}
+#pollutant-distribution-chart .placeholder-text, #pollutant-evolution-chart .placeholder-text, #city-comparison-chart .placeholder-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: calc(100% - 36px); }
 #city-comparison-chart .placeholder-text { position: static; transform: none; }
 #country-map .placeholder-text { position: static; transform: none; }
 
-/* Axes for Country Detail Charts (from V26_user) */
-.country-details-container .axis .domain { stroke: var(--axis-line-color); stroke-width: 1px; opacity: 0.8; }
-.country-details-container .axis text { font-size: 11.5px; font-weight: 400; fill: var(--axis-text-color); }
-.country-details-container .y-axis .tick text { font-weight: 500; fill: var(--text-primary); }
-.country-details-container .axis-label { font-size: 12px; fill: var(--text-primary); font-weight: 500; }
-.country-details-container .axis .tick line { stroke: var(--grid-line-color); stroke-width: 1px; stroke-dasharray: var(--grid-line-style); opacity: 0.6; }
-#pollutant-evolution-chart .y-axis .tick line { stroke-dasharray: var(--grid-line-style-dense); opacity: 0.5; }
-#pollutant-distribution-chart .x-axis .tick line { opacity: 0.4; }
-.country-details-container .y-axis .domain { display: none; } /* V26 hides Y domain */
-#pollutant-distribution-chart .x-axis .domain { stroke: var(--axis-line-color); opacity: 0.8; stroke-width: 1px; }
-#city-comparison-chart .x-axis .domain { display: none; } /* V26 hides X domain */
-
-
-/* City Comparison Lollipop Chart (V6 hover styles, V7 on-lollipop label) */
-#city-comparison-chart { padding: 18px 22px; } /* V26 padding */
-#city-comparison-chart .lollipop-group { cursor: pointer; }
-#city-comparison-chart .lollipop-line { stroke: var(--lollipop-line-color); stroke-width: 1.8px; transition: stroke var(--transition-fast), stroke-width var(--transition-fast); }
-#city-comparison-chart .lollipop-dot { fill: var(--lollipop-dot-color); r: var(--lollipop-dot-radius); stroke: var(--lollipop-dot-stroke); stroke-width: 2px; transition: r var(--transition-fast), filter var(--transition-fast), fill var(--transition-fast); filter: drop-shadow(0px 1px 1.5px rgba(0,0,0,0.12)); }
-#city-comparison-chart .lollipop-group:hover .lollipop-line { stroke: var(--lollipop-line-hover-color); stroke-width: 2.5px; }
-#city-comparison-chart .lollipop-group:hover .lollipop-dot { r: var(--lollipop-dot-hover-radius); filter: drop-shadow(0px 2px 3.5px rgba(0,0,0,0.22)); fill: var(--text-accent-dark); }
-#city-comparison-chart .guideline-line { stroke: var(--guideline-color); stroke-width: 1.2px; stroke-dasharray: 3,3; opacity: 0.75; } /* V26 guideline */
-#city-comparison-chart .guideline-label { fill: var(--guideline-text-color); font-size: 9.5px; font-weight: 500; opacity: 0.8;} /* V26 guideline */
-
-.on-lollipop-hover-label { /* For City Comparison Chart - label ABOVE dot */
-    opacity: 0;
-    transition: opacity 0.1s ease-out;
-    pointer-events: none;
-    font-family: var(--font-primary);
-    z-index: 10; /* Ensure it's above lollipops */
+#pollutant-distribution-chart .zero-line { stroke: var(--zero-line-color); stroke-width: 1.5px; stroke-dasharray: none; transition: stroke 0.3s; }
+#pollutant-evolution-chart .pollutant-line { stroke-width: var(--line-stroke-width); }
+#pollutant-evolution-chart .evolution-point {
+    stroke: var(--point-stroke-color);
+    stroke-width: 1.8px;
+    transition: r 0.18s, opacity 0.18s, fill 0.18s, stroke-width 0.18s, filter 0.22s, stroke 0.3s;
 }
-.on-lollipop-hover-label rect {
-    fill: var(--on-element-label-bg-blue); /* Blue background */
-    rx: var(--on-element-label-radius);
-    ry: var(--on-element-label-radius);
+#pollutant-evolution-chart .evolution-point.selected {
+    stroke: var(--point-click-stroke);
+    stroke-width: 2.2px;
+    opacity: 1 !important;
 }
-.on-lollipop-hover-label text {
-    fill: var(--on-element-label-text); /* White text */
-    font-size: var(--on-element-label-font-size);
+
+.evolution-guideline-label {
+    font-size: calc(var(--smaller-font-size) - 1px);
     font-weight: 500;
-    text-anchor: middle;
-    dominant-baseline: middle;
+    text-anchor: end;
+    paint-order: stroke;
+    stroke: var(--bg-chart);
+    stroke-width: 2.5px;
+    transition: stroke 0.3s, fill 0.3s;
+    opacity: 0.9;
+}
+
+#city-comparison-chart .lollipop-line { stroke: var(--lollipop-line-color); stroke-width: 1.5px; transition: stroke 0.3s; }
+#city-comparison-chart .lollipop-dot {
+    fill: var(--lollipop-dot-color);
+    stroke: var(--lollipop-dot-stroke);
+    stroke-width: var(--lollipop-dot-stroke-width);
+    transition: r 0.18s, opacity 0.18s, fill 0.18s, stroke-width 0.18s, filter 0.22s, stroke 0.3s;
+}
+
+.lollipop-value-label {
+    font-size: var(--smaller-font-size);
+    fill: var(--text-primary);
+    font-weight: 500;
+    pointer-events: none;
+    transition: fill 0.3s, opacity 0.3s;
 }
 
 
-/* Pollutant Distribution Z-Score Chart (from V26_user) */
-#pollutant-distribution-chart .dist-bar { cursor: pointer; transition: opacity 0.18s, filter 0.18s, fill 0.18s, width var(--transition-medium), x var(--transition-medium); rx: var(--dist-bar-radius); ry: var(--dist-bar-radius); filter: brightness(1); }
-#pollutant-distribution-chart .dist-bar:hover { filter: brightness(0.8); } /* V26 hover brightness */
-#pollutant-distribution-chart .y-axis .tick text { font-weight: 600; font-size: 12px; fill: var(--text-primary); } /* V26 y-axis tick */
-#pollutant-distribution-chart .zero-line { stroke: var(--zero-line-color); stroke-width: 1.5px; stroke-dasharray: none; } /* V26 zero line */
-
-/* Pollutant Evolution Chart (from V26_user) */
-#pollutant-evolution-chart .pollutant-line { fill: none; stroke-width: var(--line-stroke-width); stroke-linejoin: round; stroke-linecap: round; transition: opacity 0.25s, stroke-width 0.25s, stroke var(--transition-fast); }
-#pollutant-evolution-chart .pollutant-line:hover { stroke-width: calc(var(--line-stroke-width) + 0.7px); opacity: 0.8; } /* V26 line hover */
-#pollutant-evolution-chart .evolution-point { r: var(--point-radius); stroke: var(--point-stroke-color); stroke-width: 1.8px; cursor: pointer; transition: r 0.18s ease-out, opacity 0.18s ease-out, stroke 0.18s, filter 0.18s, fill var(--transition-fast); opacity: 0.8; filter: brightness(1); }
-#pollutant-evolution-chart .evolution-point:hover { r: var(--point-hover-radius); opacity: 1; filter: drop-shadow(0 0.5px 1.5px rgba(0,0,0,0.18)); } /* V26 point hover */
-#pollutant-evolution-chart .evolution-point.selected { r: var(--point-click-radius); opacity: 1; stroke: var(--point-click-stroke); stroke-width: 2.2px; filter: drop-shadow(0 0.5px 1px rgba(0,0,0,0.12)); } /* V26 point selected */
-#pollutant-evolution-chart .evolution-point.hidden { opacity: 0 !important; r: 0 !important; pointer-events: none !important; }
-.evolution-guideline-line { transition: opacity 0.25s, stroke-width var(--transition-fast); } /* V26 guideline line */
-.evolution-guideline-label { font-size: 9px; font-weight: 500; paint-order: stroke; stroke: var(--chart-bg); stroke-width: 2.2px; pointer-events: none; opacity: 0.8; transition: opacity 0.25s, font-size var(--transition-fast); } /* V26 guideline label */
-.evolution-guideline-label.hidden { opacity: 0; }
-
-/* Pollutant Checkboxes (from V26_user) */
-.pollutant-checkboxes { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px 22px; padding: 8px 0 12px 0; border-bottom: 1px solid var(--border-color-light); margin-bottom: 12px; }
-.pollutant-checkboxes .placeholder-text { width: 100%; text-align: center; color: var(--text-muted); font-size: 0.8em; margin: 4px 0; }
-.pollutant-checkboxes label.checkbox-item { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; font-size: 0.85em; transition: opacity 0.18s; }
-.pollutant-checkboxes label.checkbox-item:hover .checkbox-label-text { filter: brightness(0.85); }
-.pollutant-checkboxes input[type="checkbox"] { cursor: pointer; width: 15px; height: 15px; accent-color: var(--text-accent); transition: opacity 0.18s, transform 0.08s ease-out; border: 1px solid var(--border-color); border-radius: 2.5px; appearance: none; -webkit-appearance: none; position: relative;}
-.pollutant-checkboxes input[type="checkbox"]:checked { background-color: var(--text-accent); border-color: var(--text-accent-dark); }
-.pollutant-checkboxes input[type="checkbox"]:checked::before { content: '✔'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 10px; line-height:1; }
-.pollutant-checkboxes input[type="checkbox"]:hover { transform: scale(1.07); }
-.pollutant-checkboxes input[type="checkbox"]:disabled { cursor: not-allowed; opacity: 0.55; background-color: var(--border-color-light); border-color: var(--border-color); }
+.pollutant-checkboxes { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px 22px; padding: 8px 0 12px 0; border-bottom: 1px solid var(--border-secondary); margin-bottom: 12px; transition: border-color 0.3s;}
+.pollutant-checkboxes .placeholder-text { color: var(--text-muted); font-size: var(--small-font-size); }
+.pollutant-checkboxes label.checkbox-item input[type="checkbox"]:checked { background-color: var(--text-accent); border-color: var(--text-accent-dark); }
+html[data-theme="dark"] .pollutant-checkboxes label.checkbox-item input[type="checkbox"]:checked { border-color: var(--text-accent); }
+.pollutant-checkboxes input[type="checkbox"]:disabled { background-color: var(--border-secondary); border-color: var(--border-primary); }
 .pollutant-checkboxes input[type="checkbox"]:disabled::before { display:none; }
-.pollutant-checkboxes input[type="checkbox"]:disabled + .checkbox-label-text { opacity: 0.55; cursor: not-allowed; filter: none; }
 .pollutant-checkboxes label.checkbox-item:has(input[type="checkbox"]:disabled) { cursor: not-allowed; }
-.pollutant-checkboxes .checkbox-label-text { transition: filter 0.18s; font-weight: 500; }
+.pollutant-checkboxes .checkbox-label-text { font-weight: 500; color: var(--text-secondary); transition: color 0.3s; font-size: var(--small-font-size); }
+html[data-theme="dark"] .pollutant-checkboxes .checkbox-label-text { color: var(--text-secondary); }
+html[data-theme="dark"] .pollutant-checkboxes input[type="checkbox"]:checked + .checkbox-label-text { color: var(--text-primary); }
 
-/* Chart Click Info (from V26_user) */
-.chart-click-info { font-size: 0.85em; color: var(--text-secondary); margin-top: 8px; padding: 8px 12px; border: 1px solid var(--border-color-light); border-radius: 5px; background-color: var(--control-bg); min-height: 1.4em; text-align: center; transition: background-color 0.25s, color 0.25s, box-shadow var(--transition-fast); }
-.chart-click-info:not(:empty):hover { box-shadow: var(--shadow-md); }
-.chart-click-info strong { color: var(--text-primary); font-weight: 600; margin-right: 4px; }
+.chart-click-info { font-size: var(--small-font-size); color: var(--text-secondary); margin-top: 8px; padding: 8px 12px; border: 1px solid var(--border-secondary); border-radius: 5px; background-color: var(--bg-control); min-height: 1.4em; text-align: center; transition: background-color 0.3s, color 0.3s, box-shadow var(--transition-fast), border-color 0.3s; }
+.chart-click-info strong { color: var(--text-primary); font-weight: 600; }
 .chart-click-info .value { font-weight: 600; color: var(--text-accent-dark); }
-.chart-click-info .year { color: var(--text-muted); margin-left: 4px; }
+.chart-click-info .year { color: var(--text-muted); }
 
-/* --- Global Tooltip (V26_user Style) --- */
-.tooltip {
-    opacity: 0;
-    position: absolute;
-    background-color: var(--tooltip-bg); /* Sfondo scuro semi-trasparente */
-    color: var(--tooltip-text); /* Colore testo di fallback, non usato se le classi sotto sono precise */
-    padding: 10px 14px;       /* Padding interno come da foto */
-    border-radius: 6px;       /* Angoli arrotondati come da foto */
-    font-family: var(--font-primary);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* Ombra più definita */
-    pointer-events: none;     /* Non interferisce con il mouse */
-    white-space: nowrap;
-    z-index: 1001;
-    line-height: 1.4;         /* Interlinea standard */
-    transform: translateY(5px); /* Posizione iniziale per transizione "fade-in dall'alto" */
-    transition: opacity 0.15s ease-out, transform 0.15s ease-out; /* Transizione fluida */
-}
+.tooltip { background-color: var(--bg-tooltip); color: var(--text-tooltip); font-size: var(--tooltip-font-size); transition: background-color 0.3s, color 0.3s, opacity 0.15s, transform 0.15s; }
+.tooltip-country { color: var(--text-tooltip-strong); font-size: 1.05em; }
+.tooltip-detail { margin-top: 4px; }
+.tooltip-value { color: var(--text-accent); font-weight: 600; }
+.tooltip-unit { color: var(--text-muted); font-size: 0.9em;}
+.tooltip-year { color: var(--text-muted); font-size: 0.9em; margin-top: 4px; }
+html[data-theme="dark"] .tooltip-unit, html[data-theme="dark"] .tooltip-year { color: var(--text-muted); }
 
-.tooltip-country {
-    font-weight: 600;         /* Grassetto per il nome del paese */
-    color: rgb(0,0,0);       /* Testo bianco */
-    font-size: 13.5px;        /* Dimensione del testo per il paese */
-    margin-bottom: 4px;       /* Spazio tra nome paese e valore */
-    padding-bottom: 3px;      /* Leggero spazio sotto, se vuoi aggiungere un bordo dopo */
-    /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Esempio di bordo sottile, se desiderato */
-}
+.dominant-pollutant-info { font-size: var(--small-font-size); color: var(--text-secondary); margin-top: 12px; text-align: center; transition: color 0.3s;}
+.dominant-pollutant-info strong { color: var(--text-primary); font-weight: 600; transition: color 0.3s;}
 
-.tooltip-detail {
-    display: flex;            /* Per allineare valore e unità sulla stessa riga */
-    align-items: baseline;    /* Allinea il testo sulla sua linea di base */
-    gap: 5px;                 /* Spazio tra il valore e l'unità di misura */
-}
-
-.tooltip-value {
-    font-weight: 700;         /* Testo grassetto per il valore */
-    color: var(--text-accent);/* Colore blu (#3b82f6) per il valore */
-    font-size: 15px;          /* Testo più grande per il valore */
-}
-
-.tooltip-unit {
-    font-size: 11px;          /* Testo più piccolo per l'unità */
-    color: rgb(0,0,0);      /* Colore grigio (#64748b) per l'unità */
-    font-weight: 400;         /* Peso normale */
-    line-height: 1;           /* Per un migliore allineamento verticale con il valore più grande */
-}
-
-.tooltip-year { /* Stile per l'anno, se i tuoi dati lo includono per il tooltip */
-    font-size: 11px;
-    color: #bdc3c7;           /* Grigio più chiaro per l'anno */
-    margin-top: 5px;          /* Spazio sopra l'anno */
-    text-align: right;        /* Allinea l'anno a destra */
-}
-
-
-.dominant-pollutant-info { font-size: 0.85em; color: var(--text-secondary); margin-top: 12px; text-align: center; }
-.dominant-pollutant-info strong { color: var(--text-primary); font-weight: 600; }
-
-/* --- EV Chart Section (Styles from V6, based on V26_user for some elements) --- */
-section#ev-air-quality-correlation { display: flex; flex-direction: column; gap: 18px; width: 100%; margin-top: 5px; } /* V26 spacing */
-section#ev-air-quality-correlation > h2 { margin: 0 0 3px 0; font-size: 1.5em; color: var(--text-primary); font-weight: 600; border-bottom: 1px solid var(--border-color-light); padding-bottom: 10px; display: flex; align-items: center; gap: 8px; } /* V26 styling */
-section#ev-air-quality-correlation > h2 i { color: #16a34a; font-size: 0.9em; } /* EV icon green */
-.ev-controls { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px 25px; padding-bottom: 12px; margin-top: 0; width: 100%; } /* V26 spacing */
-.ev-controls .control-group { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-.ev-controls .control-group label { font-weight: 500; color: var(--text-secondary); font-size: 0.85em; text-align: center; }
-.ev-controls .select-wrapper { display: inline-block; }
-select#ev-country-select-1, select#ev-country-select-2 { padding: 9px 38px 9px 14px; border: 1px solid var(--border-color); border-radius: 7px; font-size: 0.9em; font-family: var(--font-primary); appearance: none; -webkit-appearance: none; -moz-appearance: none; background-color: #fff; cursor: pointer; min-width: 240px; max-width: 100%; transition: border-color var(--transition-fast), box-shadow var(--transition-fast); background-image: none; color: var(--text-primary); }
-select#ev-country-select-1:hover, select#ev-country-select-2:hover { border-color: var(--text-accent); }
-select#ev-country-select-1:focus, select#ev-country-select-2:focus { outline: none; border-color: var(--text-accent); box-shadow: 0 0 0 2.5px var(--shadow-color); }
-#ev-air-quality-chart-container { width: 100%; min-height: 380px; position: relative; border-radius: 10px; background-color: var(--chart-bg); border: 1px solid var(--chart-border); box-shadow: var(--shadow-md); padding: 22px 28px; transition: box-shadow var(--transition-medium); } /* V26 padding/radius */
+/* EV Chart Section */
+section#ev-air-quality-correlation { display: flex; flex-direction: column; gap: 18px; width: 100%; margin-top: 5px; }
+section#ev-air-quality-correlation > h2 { margin: 0 0 3px 0; font-size: 1.55em; color: var(--text-primary); font-weight: 600; border-bottom: 1px solid var(--border-secondary); padding-bottom: 10px; display: flex; align-items: center; gap: 8px; transition: color 0.3s, border-color 0.3s; }
+section#ev-air-quality-correlation > h2 i { color: #16a34a; font-size: 0.9em; }
+#ev-air-quality-chart-container { width: 100%; min-height: 380px; position: relative; border-radius: 10px; background-color: var(--bg-chart); border: 1px solid var(--border-primary); box-shadow: var(--shadow-md); padding: 22px 28px; transition: box-shadow var(--transition-medium), background-color 0.3s, border-color 0.3s; }
 #ev-air-quality-chart-container:hover { box-shadow: var(--shadow-lg); }
-#ev-air-quality-chart { width: 100%; height: 100%; }
-#ev-air-quality-chart .axis .domain { stroke: var(--axis-line-color); stroke-width: 1px; opacity: 0.8; }
-#ev-air-quality-chart .axis text { font-size: 11.5px; fill: var(--axis-text-color); }
-#ev-air-quality-chart .axis-label { font-size: 12px; fill: var(--text-primary); font-weight: 500; }
-#ev-air-quality-chart .grid line { stroke: var(--grid-line-color); stroke-dasharray: var(--grid-line-style-dense); opacity: 0.6; }
-#ev-air-quality-chart .grid .domain { display: none; }
-#ev-air-quality-chart .reference-line { stroke-width: 1.2px; stroke-dasharray: 4, 4; opacity: 0.7; pointer-events: none; } /* V26 line style */
-#ev-air-quality-chart .reference-line-label { font-size: 9px; font-weight: 500; fill: var(--text-secondary); pointer-events: none; opacity: 0.8; paint-order: stroke; stroke: var(--chart-bg); stroke-width: 2px; } /* V26 label style */
-#ev-air-quality-chart .line-data { transition: opacity 0.22s ease-out, stroke-width 0.22s ease-out, filter 0.22s ease-out; stroke-linecap: round; }
-#ev-air-quality-chart .chart-dot { transition: r 0.18s ease-out, opacity 0.22s ease-out, fill 0.18s ease-out, stroke-width 0.18s ease-out, filter 0.22s ease-out; stroke: var(--chart-bg); stroke-width: 1.5px; }
-#ev-air-quality-chart .series-hovered { stroke-width: 4.2px !important; opacity: 1 !important; filter: drop-shadow(0 1px 1.8px rgba(0,0,0,0.18)); } /* V26 hover effect strength */
+#ev-air-quality-chart .reference-line-label {
+    /* fill color set by JS */
+    font-size: calc(var(--smaller-font-size) + 0.5px);
+    font-weight: 500;
+    opacity: 0.85;
+    transition: stroke 0.3s, opacity 0.2s;
+    paint-order: stroke;
+    stroke: var(--bg-chart);
+    stroke-width: 2.5px;
+}
+#ev-air-quality-chart .reference-line-label.reference-dimmed { opacity: 0.2 !important; }
+
+#ev-air-quality-chart .chart-dot { stroke: var(--bg-chart); transition: r 0.18s, opacity 0.22s, fill 0.18s, stroke-width 0.18s, filter 0.22s, stroke 0.3s; }
+#ev-air-quality-chart .series-hovered { stroke-width: 4.2px !important; opacity: 1 !important; filter: drop-shadow(0 1px 1.8px rgba(0,0,0,0.18)); }
 #ev-air-quality-chart .dot-series-hovered { r: 6.5px !important; opacity: 1 !important; stroke-width: 1.8px !important; filter: drop-shadow(0 1px 2.2px rgba(0,0,0,0.25)); }
-#ev-air-quality-chart .series-dimmed { opacity: 0.18 !important; } /* V26 dimming */
+#ev-air-quality-chart .series-dimmed { opacity: 0.18 !important; }
 #ev-air-quality-chart .dot-series-dimmed { opacity: 0.12 !important; r: 3.8px !important; }
 #ev-air-quality-chart .dot-corresponding-highlight { r: 6px !important; opacity: 0.85 !important; stroke: var(--text-accent-dark); stroke-width: 1.8px !important; filter: drop-shadow(0 1px 1.2px rgba(0,0,0,0.18)); }
-.chart-legend { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px 22px; margin-top: 12px; padding: 8px; background-color: var(--control-bg); border-radius: 7px; border: 1px solid var(--border-color-light); } /* V26 spacing */
-.legend-item { display: flex; align-items: center; font-size: 0.85em; color: var(--text-secondary); }
-.legend-color-box { width: 14px; height: 14px; margin-right: 7px; border-radius: 2.5px; border: 1px solid rgba(0,0,0,0.08); }
-.legend-item .line-preview { width: 22px; height: 2.5px; margin-right: 7px; border-radius: 1.25px; }
+#ev-air-quality-chart .reference-line.reference-dimmed { opacity: 0.15 !important; }
 
-/* EV Chart Tooltip (V26_user Style for #ev-chart-tooltip) */
-#ev-chart-tooltip {
-    opacity: 0;
-    position: absolute;
-    background-color: var(--tooltip-bg-v26); /* Using V26 tooltip background */
-    color: var(--tooltip-text-v26);
-    padding: 8px 13px; /* V26 padding */
-    border-radius: 6px; /* V26 radius */
-    font-size: 12.5px;
-    font-family: var(--font-primary);
-    box-shadow: 0 3px 9px rgba(0,0,0,0.2); /* V26 shadow */
+.chart-legend { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px 22px; margin-top: 12px; padding: 8px; background-color: var(--bg-control); border-radius: 7px; border: 1px solid var(--border-secondary); transition: background-color 0.3s, border-color 0.3s; }
+.legend-item { color: var(--text-secondary); font-size: var(--small-font-size); transition: color 0.3s; }
+.legend-color-box { border: 1px solid rgba(0,0,0,0.08); }
+html[data-theme="dark"] .legend-color-box { border-color: rgba(255,255,255,0.1); }
+#ev-chart-tooltip { background-color: var(--bg-tooltip); color: var(--text-tooltip); font-size: var(--tooltip-font-size); transition: opacity 0.15s, transform 0.15s, background-color 0.3s, color 0.3s; }
+#ev-chart-tooltip strong { color: var(--text-tooltip-strong); }
+#ev-chart-tooltip .year-info { color: var(--text-muted); }
+html[data-theme="dark"] #ev-chart-tooltip .year-info { color: var(--text-muted); }
+
+footer { margin-top: 45px; text-align: center; color: var(--text-muted); font-size: var(--small-font-size); width: 100%; border-top: 1px solid var(--border-secondary); padding-top: 20px; transition: color 0.3s, border-color 0.3s;}
+#current-year-footer {transition: color 0.3s;}
+
+.on-lollipop-hover-label { display: none !important; }
+
+.lollipop-value-label {
+    font-size: var(--smaller-font-size);
+    fill: var(--text-primary);
+    font-weight: 500;
     pointer-events: none;
-    white-space: nowrap;
-    transition: opacity var(--transition-fast), transform var(--transition-fast);
-    z-index: 1002;
-    line-height: 1.5;
-    transform: translateY(4px) scale(0.96);
+    transition: fill 0.3s, opacity 0.3s;
 }
-#ev-chart-tooltip.active { opacity: 1; transform: translateY(0) scale(1); }
-#ev-chart-tooltip strong { font-weight: 600; display: block; margin-bottom: 4px; color: #fff; font-size: 1.05em;}
-#ev-chart-tooltip .year-info { font-size: 0.88em; color: #cbd5e1; display: block; margin-bottom: 3px; }
-#ev-chart-tooltip .series-name { display: block; font-size: 0.88em; font-weight: 500; margin-bottom: 1.5px; }
-#ev-chart-tooltip .value { font-weight: 600; font-size: 1.02em; }
 
-
-footer { margin-top: 45px; text-align: center; color: var(--text-muted); font-size: 0.85em; width: 100%; border-top: 1px solid var(--border-color-light); padding-top: 20px; } /* V26 spacing */
-
-/* Responsive Adjustments (Consolidated from V26 and V6) */
-@media (max-width: 1100px) { main#overview-visualization { flex-direction: column; gap: 35px; align-items: center; } #visualization-area, .flashcard { min-width: 100%; flex-basis: auto; width: 100%; } #visualization-area { flex: 1; } .flashcard { flex: 1; max-width: 680px; } .country-details-container { gap: 25px; } #country-map-section, #country-stats-section { min-width: calc(50% - 12.5px); } }
-@media (max-width: 900px) { .country-details-container { flex-direction: column; gap: 25px; } #country-map-section, #country-stats-section { min-width: 100%; } #country-map { height: 360px; } }
-@media (max-width: 768px) { body { padding: 20px 12px; } .container { padding: 20px 22px; } h1 { font-size: 1.85em; } header .controls-container { gap: 12px; } .flashcard h2 { font-size: 1.25em; } select#pollutant-select, select#country-select,select#ev-country-select-1, select#ev-country-select-2, select#city-pollutant-select { min-width: 230px; font-size:0.88em; padding: 8px 35px 8px 12px;} .year-overlay-text { font-size: 2.5em; } .country-details-container .axis text { font-size: 11px; } #bar-chart .y-axis .tick text { font-size: 11.8px; } .country-details-container .axis-label { font-size: 11.5px; } section#country-view > h2, section#ev-air-quality-correlation > h2 { font-size: 1.35em; }
+/* Responsive Adjustments */
+@media (max-width: 1100px) {
+    main#overview-visualization { flex-direction: column; gap: 35px; align-items: center; }
+    #visualization-area, .flashcard { min-width: 100%; flex-basis: auto; width: 100%; }
+    .flashcard { flex: 1; max-width: 680px; }
+    .country-details-container { gap: 25px; }
+    #country-map-section, #country-stats-section { min-width: calc(50% - 12.5px); }
+    .map-legend-wrapper { flex-direction: column; gap: 15px; }
+    #heatmap-legend-europe { flex-basis: auto; width: 100%; max-height: 200px; }
+    .heatmap-controls { flex-direction: column; align-items: center; }
+    .heatmap-controls .control-group { width: 100%; max-width: 350px; }
+}
+@media (max-width: 900px) {
+    .country-details-container { flex-direction: column; gap: 25px; }
+    #country-map-section, #country-stats-section { min-width: 100%; }
+    #country-map { height: 380px; }
+    #heatmap-container-europe { height: 420px; }
+}
+@media (max-width: 768px) {
+    body { padding: 20px 12px; font-size: calc(var(--base-font-size) - 0.5px); }
+    .container { padding: 20px 15px; }
+    .header-content { flex-direction: column; gap: 10px; align-items: center; }
+    h1 { font-size: 1.8em; margin-left: 0; order: 1; }
+    .theme-toggle { position: static; order: 0; margin-bottom:10px; }
+    h1 { order: 1; }
+    .controls-container { flex-direction: column; align-items: center; gap: 18px;}
+    .control-group { width: 100%; align-items: center; }
+    .select-wrapper select, input[type="range"] { width: 90%; min-width: unset; max-width: 380px; font-size:0.85em; padding: 7px 32px 7px 10px;}
+    #visualization-area { min-width: 100%; gap: 12px;}
+    #bar-chart-container { min-width: 100%; }
+    #bar-chart { padding: 18px 8px; max-height: 380px; }
+    .flashcard { padding: 20px; min-width: unset; }
+    .flashcard h2 { font-size: 1.2em; }
+    .flashcard p { font-size: 0.88em; }
+    .country-details-container .axis text { font-size: 11px; }
+    #bar-chart .y-axis .tick text { font-size: 11.8px; }
+     #pollutant-distribution-chart .y-axis .tick text {
+         font-size: 11px !important;
+         text-anchor: end !important;
+     }
+    .country-details-container .axis-label { font-size: 11.5px; }
+    section#country-view > h2, section#ev-air-quality-correlation > h2 { font-size: 1.35em; }
     .country-controls, .ev-controls { flex-direction: column; align-items: stretch; gap: 12px; justify-content: flex-start; }
     .country-controls .control-group, .ev-controls .control-group { align-items: stretch; width:100%;}
     .country-controls .control-group select, .ev-controls .control-group select{align-self:center; max-width:380px;}
-    #country-map-section h3, #country-stats-section h3 { font-size: 1.1em; } #country-map { height: 300px; } .stats-chart-container h4 { font-size: 0.95em; } #pollutant-distribution-chart, #pollutant-evolution-chart, #city-comparison-chart { min-height: 230px; padding: 12px 15px;}
+    #country-map-section, #country-stats-section { padding: 18px 12px; min-width: 100%;}
+    #country-map-section h3, #country-stats-section h3 { font-size: 1.1em; }
+    #country-map { height: 300px; }
+    .stats-chart-container h4 { font-size: 0.95em; }
+    #pollutant-distribution-chart, #pollutant-evolution-chart, #city-comparison-chart { min-height: 230px; padding: 12px 15px;}
     .city-chart-controls { align-items: center; justify-content: center; }
     .city-chart-controls .control-group { align-items: center; }
-    .pollutant-checkboxes { gap: 12px 18px; padding-bottom: 8px;}
+    .select-wrapper.small-select { width: 80%;}
+    .pollutant-checkboxes { flex-direction: column; gap: 8px; }
     #ev-air-quality-chart-container { padding: 18px 12px; min-height: 330px; }
+    .chart-legend { flex-direction: column; align-items: flex-start; gap: 8px; }
     #ev-air-quality-chart .reference-line-label { font-size: 8px; stroke-width: 1.2px; }
-    .on-bar-hover-label text, .on-lollipop-hover-label text { font-size: calc(var(--on-element-label-font-size) - 0.5px); }
- }
-@media (max-width: 600px) { body { padding: 15px 8px; } .container { padding: 18px 12px; } h1 { font-size: 1.65em; gap: 8px; } header .controls-container { flex-direction: column; align-items: center; gap: 18px;} header .control-group { width: 100%; align-items: center; } select#pollutant-select, select#country-select,select#ev-country-select-1, select#ev-country-select-2, select#city-pollutant-select { width: 90%; min-width: unset; max-width: 330px; font-size:0.85em; padding: 7px 32px 7px 10px;} #visualization-area { min-width: 100%; gap: 12px;} #bar-chart-container { min-width: 100%; } #bar-chart { padding: 18px 8px; max-height: 380px; } .flashcard { padding: 20px; min-width: unset; } .flashcard h2 { font-size: 1.2em; } .flashcard p { font-size: 0.88em; } .country-details-container .axis text { font-size: 10.5px; } #bar-chart .y-axis .tick text { font-size: 11px; } .country-details-container .axis-label { font-size: 10.5px; } .year-overlay-text { font-size: 2em; } .guideline-group text { font-size: 8.5px; } .timelapse-controls { gap: 8px; padding: 7px 10px; } #year-slider-value { font-size: 1em; } #play-pause-button { width: 32px; height: 32px; } #play-pause-button i { font-size: 0.75em; } section#country-view > h2, section#ev-air-quality-correlation > h2 { font-size: 1.25em; }
+    .on-bar-hover-label, .on-lollipop-hover-label { display: none; }
+    .leaflet-popup-content { font-size: 12px; }
+    .popup-header { padding: 7px 10px; gap: 6px;}
+    .popup-city-name { font-size: 1.1em; margin-bottom: 6px;}
+    .popup-pollutant-item { padding: 3px 0; font-size: 0.8em; }
+    .popup-timestamp { font-size: 0.7em; padding: 0 10px 5px 10px; }
+}
+@media (max-width: 600px) {
+    body { padding: 15px 8px; font-size: calc(var(--base-font-size) - 1px); }
+    .container { padding: 18px 12px; }
+    h1 { font-size: 1.6em; gap: 8px;}
+    .header-content { flex-direction: column; align-items: center; gap: 18px;}
+    .theme-toggle { order: 0; margin-bottom: 10px; margin-left: 0; }
+    h1 { order: 1; }
+    .controls-container { flex-direction: column; align-items: center; gap: 18px;}
+    .control-group { width: 100%; align-items: center; }
+    .select-wrapper select, input[type="range"] { width: 90%; min-width: unset; max-width: 330px; font-size:0.85em; padding: 7px 32px 7px 10px;}
+    #visualization-area { min-width: 100%; gap: 12px;}
+    #bar-chart-container { min-width: 100%; }
+    #bar-chart { padding: 18px 8px; max-height: 380px; }
+    .flashcard { padding: 20px; min-width: unset; }
+    .flashcard h2 { font-size: 1.2em; }
+    .flashcard p { font-size: 0.88em; }
+    .country-details-container .axis text { font-size: 10.5px; }
+    #bar-chart .y-axis .tick text { font-size: 11px; }
+    #pollutant-distribution-chart .y-axis .tick text {
+         font-size: 10px !important;
+         text-anchor: end !important;
+     }
+    .country-details-container .axis-label { font-size: 10.5px; }
+    .year-overlay-text { font-size: 2em; }
+    .guideline-group text { font-size: 8.5px; }
+    .timelapse-controls { gap: 8px; padding: 7px 10px; }
+    #year-slider-value { font-size: 1em; }
+    #play-pause-button { width: 32px; height: 32px; }
+    #play-pause-button i { font-size: 0.75em; }
+    section#country-view > h2, section#ev-air-quality-correlation > h2 { font-size: 1.25em; }
     .country-controls .control-group { align-items: center; width: 90%; max-width: 330px; }
     .country-controls .control-group select, .ev-controls .control-group select{align-self:center; max-width:330px;}
-    #country-map-section, #country-stats-section { padding: 18px 12px; min-width: 100%;} #country-map-section h3, #country-stats-section h3 { font-size: 1.05em; } #country-map { height: 260px; } .stats-chart-container h4 { font-size: 0.9em; } #pollutant-distribution-chart, #pollutant-evolution-chart, #city-comparison-chart { min-height: 210px; padding: 12px 8px; }
-    .evolution-guideline-label { display: none; }
+    #country-map-section, #country-stats-section { padding: 18px 12px; min-width: 100%;}
+    #country-map-section h3, #country-stats-section h3 { font-size: 1.05em; }
+    #country-map { height: 260px; }
+    .stats-chart-container h4 { font-size: 0.9em; }
+    #pollutant-distribution-chart, #pollutant-evolution-chart, #city-comparison-chart { min-height: 210px; padding: 12px 8px; }
     .city-chart-controls { width: 100%; padding-right: 0; justify-content: center;}
     .select-wrapper.small-select { width: 80%;}
     .pollutant-checkboxes { flex-direction: column; gap: 8px; }
     #ev-air-quality-chart-container { padding: 12px 8px; min-height: 300px; }
     .chart-legend { flex-direction: column; align-items: flex-start; gap: 8px; }
     #ev-air-quality-chart .reference-line-label { display: none; }
-    .on-bar-hover-label, .on-lollipop-hover-label { display: none; } /* Hide on-element labels on very small screens if they cause issues */
+    .on-bar-hover-label, .on-lollipop-hover-label { display: none; } 
+    .leaflet-popup-content { font-size: 12px; }
+    .popup-header { padding: 7px 10px; gap: 6px;}
+    .popup-city-name { font-size: 1.1em; margin-bottom: 6px;}
+    .popup-pollutant-item { padding: 3px 0; font-size: 0.8em; }
+    .popup-timestamp { font-size: 0.7em; padding: 0 10px 5px 10px; }
+}
+
+@media (max-width: 600px) {
+    .evolution-guideline-label {
+        display: unset !important;
+        visibility: visible !important;
+    }
 }
