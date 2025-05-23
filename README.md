@@ -16,7 +16,7 @@
 | [Emanuele Rimoldi](https://github.com/EmaRimoldi) | 377013 |
 
 ## 🗂️ Outline
-1. [Abstract](#abstract)
+1. [Abstract](#description)
 2. [Data](#data)
 3. [Conda Env](#conda-env)
 4. [Project Structure](#project-structure)
