@@ -52,16 +52,6 @@ import {
 
 import { availableCountries } from './countries.js';
 
-// import { 
-//     updateChart,
-//     updatePollutantInfo,
-//     startTimelapse,
-//     stopTimelapse,
-//     togglePlayPause,
-//     handleMouseOver,
-//     handleMouseOut
-// } from './pollutantPlots.js';
-
 // Globale Variables
 let mapInstance = null;
 let currentMarkers = [];
@@ -245,7 +235,6 @@ function positionTooltip(event, tooltipSelection) {
 
 function handleMouseOver(event, d) {
 
-    console.log("Mouseover event:", d);
     let countryName = d.Paese || d.name || d.pollutant || "N/A";
     let value, unit, isZScore = false, yearInfo = d.year || null;
 

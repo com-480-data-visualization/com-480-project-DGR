@@ -3,7 +3,7 @@
 import { availableCountries } from "./countries.js";
 
 async function loadAndTransformData() {
-    const res = await fetch('./assets/data/air_quality_data.json');
+    const res = await fetch('./assets/data/air_quality_data_with_cities.json');
     const rawData = await res.json();
     const data = {};
   
@@ -31,7 +31,7 @@ async function loadAndTransformData() {
 }
 
 async function loadCountrySpecificData() {
-    const response = await fetch("./assets/data/air_quality_data.json");
+    const response = await fetch("./assets/data/air_quality_data_with_cities.json");
     const rawData = await response.json();
   
     const result = {};
@@ -85,18 +85,18 @@ async function loadCountrySpecificData() {
                     latLonCount += countryData.length;
 
                     for (const entry of countryData) {
-                        if (!cities[entry.Samplingpoint]) {
-                            cities[entry.Samplingpoint] = {
-                                name: entry.Samplingpoint,
+                        if (!cities[entry.City]) {
+                            cities[entry.City] = {
+                                name: entry.City,
                                 lat: entry.Latitude,
                                 lon: entry.Longitude,
                                 pollution: {},
                             };
                         }
-                        if (!cities[entry.Samplingpoint].pollution[pollutant]) {
-                            cities[entry.Samplingpoint].pollution[pollutant] = [];
+                        if (!cities[entry.City].pollution[pollutant]) {
+                            cities[entry.City].pollution[pollutant] = [];
                         }
-                        cities[entry.Samplingpoint].pollution[pollutant].push(entry.Concentration);
+                        cities[entry.City].pollution[pollutant].push(entry.Concentration);
                     }
                 } else {
                     countryEntry.pollutantEvolution[pollutant][year] = null;
@@ -166,7 +166,7 @@ function getAQIFromPM25(pm) {
 }
 
 async function loadAQIData(timeframe) {
-    const response = await fetch("./assets/data/air_quality_data.json");
+    const response = await fetch("./assets/data/air_quality_data_with_cities.json");
     const rawData = await response.json();
 
     const results = [];
