@@ -20,7 +20,7 @@
 - [Milestone2](./milestone2/Milestone2_DGR.pdf)
 - [Milestone3](./milestone3/ProcessBook_DGR.pdf)
 - [Website](https://com-480-data-visualization.github.io/com-480-project-DGR/)
-- [Screencast](https://drive.google.com/file/d/1CwCQC62-vEC8ymORb9-4itADhIKu_CwO/view?usp=sharing)
+- [Screencast](https://drive.google.com/file/d/1CwCQC62-vEC8ymORb9-4itADhIKu_CwO/view?usp=sharing) (for a better quality you can download it!)
 
 ## 🌍 Description
 
