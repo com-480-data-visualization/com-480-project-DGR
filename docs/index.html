@@ -240,19 +240,24 @@
 											Click on a point to see details.
 										</div>
 									</div>
-									<div class="stats-chart-container">
+								</div>
+
+								<div style="display: flex; justify-content: center; width: 100%;">
+
+									<div id="city-comparison-section" class="stats-chart-container" style="margin-top: 25px;">
 										<h4><i class="fas fa-city"></i> City Comparison (<span id="city-comparison-pollutant">N/A</span>)</h4>
 										<div class="control-group city-chart-controls">
-											<label for="city-pollutant-select" class="sr-only">Pollutant for City Comparison:</label>
-											<div class="select-wrapper small-select">
-												<select id="city-pollutant-select" aria-label="Select pollutant for city comparison chart"></select>
-												<svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 10l5 5 5-5z" /> </svg>
-											</div>
+										<label for="city-pollutant-select" class="sr-only">Pollutant for City Comparison:</label>
+										<div class="select-wrapper small-select">
+											<select id="city-pollutant-select" aria-label="Select pollutant for city comparison chart"></select>
+											<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z" /></svg>
 										</div>
-										<div id="city-comparison-chart" role="graphics-document" aria-label="Lollipop chart comparing cities within the selected country">
-											<p class="placeholder-text">Select a country and pollutant...</p>
+										</div>
+										<div id="city-comparison-chart" role="graphics-document">
+										<p class="placeholder-text">Select a country and pollutant...</p>
 										</div>
 									</div>
+
 								</div>
 							</div>
 						</main>		   

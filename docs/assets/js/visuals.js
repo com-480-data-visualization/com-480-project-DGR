@@ -868,19 +868,24 @@ function updateCityLollipopChart(countryName, countryData, selectedPollutant, in
         return;
     }
 
-    const chartWidth = parseInt(cityComparisonChartContainer.style("width")) || 300;
+    const chartWidth = cityComparisonChartContainer.node().getBoundingClientRect().width || 300;
     const chartHeight = Math.max(220, cityData.length * 28 + 60);
     const marginLollipop = { top: 20, right: 80, bottom: 45, left: 95 };
     if (chartWidth < marginLollipop.left + marginLollipop.right + 50) {
         marginLollipop.right = 20;
         marginLollipop.left = 60;
     }
-    const innerWidthLollipop = chartWidth - marginLollipop.left - marginLollipop.right;
+    // const innerWidthLollipop = chartWidth - marginLollipop.left - marginLollipop.right - 200;
     const innerHeightLollipop = chartHeight - marginLollipop.top - marginLollipop.bottom;
+
+    const innerWidthLollipop = Math.min(300, chartWidth - marginLollipop.left - marginLollipop.right);
+    const horizontalPadding = (chartWidth - marginLollipop.left - marginLollipop.right - innerWidthLollipop) / 2;
 
     const svg = cityComparisonChartContainer.append("svg")
         .attr("width", chartWidth).attr("height", chartHeight)
-        .append("g").attr("transform", `translate(${marginLollipop.left},${marginLollipop.top})`);
+        // .append("g").attr("transform", `translate(${marginLollipop.left},${marginLollipop.top})`);
+        .append("g")
+        .attr("transform", `translate(${marginLollipop.left + horizontalPadding},${marginLollipop.top})`);
 
     const xLolli = d3.scaleLinear().domain([0, d3.max(cityData, d => d.value) * 1.1 || 10]).range([0, innerWidthLollipop]).nice();
     const yLolli = d3.scaleBand().domain(cityData.map(d => d.name)).range([0, innerHeightLollipop]).padding(0.5);
