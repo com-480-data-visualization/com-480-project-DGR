@@ -203,8 +203,6 @@ function positionTooltip(event, tooltipSelection) {
     const tooltipNode = tooltipSelection.node();
     if (!tooltipNode) return;
 
-    console.log("Tooltip node:", tooltipNode);
-
     const rect = tooltipNode.getBoundingClientRect();
     const tooltipWidth = rect.width;
     const tooltipHeight = rect.height;
@@ -616,11 +614,7 @@ function initializeEuropeHeatmap() {
         europeHeatmap.on('mouseout', function() { mapTooltip.style("display", "none"); });
 
         europeHeatmap.on('click', function(e) {
-            console.log("Clicked on map:", e.latlng);
-            console.log("Clicked on map2:", heatLayer);
-            console.log("Clicked on map3:", currentAqiDataPoints);
             if (!currentAqiDataPoints || currentAqiDataPoints.length === 0 || !heatLayer) return;
-            console.log("Clicked on map3:", e.latlng);
             let nearestPoint = null;
             let minDist = Infinity;
             currentAqiDataPoints.forEach(point => {
@@ -1572,7 +1566,6 @@ async function initializeDashboard() {
     initializeEVCorrelationSection();
 
     window.addEventListener("resize", debounce(() => {
-        console.log("Window resized, re-rendering charts...");
         const selectedPollutantOverview = pollutantSelect.property("value");
         const yearForOverviewResize = parseInt(yearSlider.property("value"));
         const dataForOverviewResize = data[yearForOverviewResize]?.[selectedPollutantOverview];
