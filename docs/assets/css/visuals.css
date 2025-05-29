@@ -6,6 +6,9 @@
 
 #city-comparison-section {
     width: 60%;
+    background-color: var(--bg-chart);
+    padding: 18px 22px;
+    border-radius: 10px;
 }
 
 #city-comparison-chart svg {
@@ -314,7 +317,7 @@ section#europe-heatmap-section > h1 i { color: #e74c3c; font-size: 0.9em; }
 .heatmap-controls .control-group { flex: 1; min-width: 180px; max-width: 250px; }
 
 .map-legend-wrapper { display: flex; flex-direction: row; gap: 20px; align-items: stretch; width: 100%; }
-#heatmap-container-europe { flex-grow: 1; min-width: 0; height: 550px; background-color: var(--bg-secondary); border-radius: 10px; border: 1px solid var(--border-primary); box-shadow: var(--shadow-md); display: flex; justify-content: center; align-items: center; color: var(--text-muted); position: relative; overflow: hidden; transition: background-color 0.3s, border-color 0.3s; }
+#heatmap-container-europe { flex-grow: 1; min-width: 0; background-color: var(--bg-secondary); border-radius: 10px; border: 1px solid var(--border-primary); box-shadow: var(--shadow-md); display: flex; justify-content: center; align-items: center; color: var(--text-muted); position: relative; overflow: hidden; transition: background-color 0.3s, border-color 0.3s; }
 #heatmap-container-europe .placeholder-text { position: static; transform: none; font-size: var(--small-font-size); padding: 20px; }
 #heatmap-container-europe .leaflet-container { border-radius: 10px; }
 
@@ -343,7 +346,7 @@ html[data-theme="dark"] .heatmap-legend-item .legend-color-box { border-color: r
 }
 
 
-main#overview-visualization { display: flex; flex-wrap: wrap; gap: 35px; width: 100%; align-items: flex-start; margin-top: 5px; }
+main#overview-visualization { display: flex; flex-wrap: wrap; gap: 35px; width: 100%; align-items: stretch; margin-top: 5px; }
 main#overview-visualization > .controls-container { margin-bottom: 20px; width:100%;}
 #visualization-area { flex: 5; min-width: 480px; display: flex; flex-direction: column; gap: 12px; }
 #bar-chart-container { width: 100%; position: relative; border-radius: 10px; background-color: var(--bg-chart); border: 1px solid var(--border-primary); box-shadow: var(--shadow-md); transition: background-color 0.3s, border-color 0.3s; }
@@ -354,7 +357,7 @@ html[data-theme="dark"] .chart-overlay { background-color: rgba(30, 41, 59, 0.8)
 .chart-overlay i { margin-right: 8px; animation: spin 1.5s linear infinite; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-.timelapse-controls { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 8px 12px; background-color: var(--bg-control); border-radius: 7px; border: 1px solid var(--border-primary); transition: background-color 0.3s, border-color 0.3s; }
+.timelapse-controls { display: flex; align-items: center; margin-top: auto; justify-content: center; gap: 12px; width: 100%; padding: 8px 12px; background-color: var(--bg-control); border-radius: 7px; border: 1px solid var(--border-primary); transition: background-color 0.3s, border-color 0.3s; }
 #play-pause-button { background: none; border: 1px solid var(--border-primary); border-radius: 50%; padding: 0; width: 34px; height: 34px; cursor: pointer; color: var(--text-accent); display: flex; justify-content: center; align-items: center; flex-shrink: 0; transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast); }
 #play-pause-button:hover { background-color: var(--text-accent-dark); color: var(--text-on-accent); border-color: var(--text-accent-dark); box-shadow: 0 1px 3px var(--shadow-sm); }
 #play-pause-button i { font-size: 0.8em; pointer-events: none; }
@@ -363,7 +366,7 @@ html[data-theme="dark"] .chart-overlay { background-color: rgba(30, 41, 59, 0.8)
 #year-slider-value { font-weight: 600; color: var(--text-primary); min-width: 3ch; text-align: left; transition: color 0.3s; font-size: 0.92em; }
 
 /* Flashcard */
-.flashcard { flex: 3; min-width: 280px; padding: 25px; border: 1px solid var(--flashcard-border); border-radius: 10px; background: var(--flashcard-bg); box-shadow: var(--shadow-md); transition: opacity var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium), background-color 0.3s, border-color 0.3s; opacity: 1; transform: translateY(0) scale(1); align-self: flex-start; }
+.flashcard { flex: 3; min-width: 280px; padding: 25px; border: 1px solid var(--flashcard-border); border-radius: 10px; background: var(--flashcard-bg); box-shadow: var(--shadow-md); transition: opacity var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium), background-color 0.3s, border-color 0.3s; opacity: 1; transform: translateY(0) scale(1); align-self: stretch; }
 .flashcard:hover { box-shadow: var(--shadow-lg); transform: translateY(-1.5px) scale(1.005); }
 .flashcard.updating { opacity: 0.5; transform: scale(0.98); pointer-events: none; }
 .flashcard.updating > * { opacity: 0.6; }

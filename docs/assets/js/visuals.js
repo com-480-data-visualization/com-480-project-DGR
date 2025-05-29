@@ -875,7 +875,6 @@ function updateCityLollipopChart(countryName, countryData, selectedPollutant, in
         marginLollipop.right = 20;
         marginLollipop.left = 60;
     }
-    // const innerWidthLollipop = chartWidth - marginLollipop.left - marginLollipop.right - 200;
     const innerHeightLollipop = chartHeight - marginLollipop.top - marginLollipop.bottom;
 
     const innerWidthLollipop = Math.min(300, chartWidth - marginLollipop.left - marginLollipop.right);
@@ -883,7 +882,6 @@ function updateCityLollipopChart(countryName, countryData, selectedPollutant, in
 
     const svg = cityComparisonChartContainer.append("svg")
         .attr("width", chartWidth).attr("height", chartHeight)
-        // .append("g").attr("transform", `translate(${marginLollipop.left},${marginLollipop.top})`);
         .append("g")
         .attr("transform", `translate(${marginLollipop.left + horizontalPadding},${marginLollipop.top})`);
 
