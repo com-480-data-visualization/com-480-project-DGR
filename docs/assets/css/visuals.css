@@ -4,6 +4,31 @@
     color: #e74c3c; 
 }
 
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 4px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.legend-line {
+    width: 30px;
+    height: 0;
+}
+
+.pm25-line {
+    height: 3px;
+    background-color: steelblue;
+}
+
+.ev-line {
+    height: 0;
+    border-top-width: 3px;
+    border-top-style: dashed;
+}
+
 :root {
     --font-primary: 'Inter', sans-serif;
     --base-font-size: 18px;

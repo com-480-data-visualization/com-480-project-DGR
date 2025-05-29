@@ -3,7 +3,7 @@
 import { availableCountries } from "./countries.js";
 
 async function loadAndTransformData() {
-    const res = await fetch('./assets/data/air_quality_data_with_cities.json');
+    const res = await fetch('./assets/data/cleaned_air_quality_data.json');
     const rawData = await res.json();
     const data = {};
   
@@ -31,7 +31,7 @@ async function loadAndTransformData() {
 }
 
 async function loadCountrySpecificData() {
-    const response = await fetch("./assets/data/air_quality_data_with_cities.json");
+    const response = await fetch("./assets/data/cleaned_air_quality_data.json");
     const rawData = await response.json();
   
     const result = {};
@@ -166,7 +166,7 @@ function getAQIFromPM25(pm) {
 }
 
 async function loadAQIData(timeframe) {
-    const response = await fetch("./assets/data/air_quality_data_with_cities.json");
+    const response = await fetch("./assets/data/cleaned_air_quality_data.json");
     const rawData = await response.json();
 
     const results = [];
@@ -183,7 +183,14 @@ async function loadAQIData(timeframe) {
         case "year":
             data = rawData[years[years.length - 1]]["PM2.5"];
             break;
+        case "live":
+            data = getLastDayData(rawData[years[years.length - 1]]["PM2.5"]);
+            break;
+        case "month":
+            data = getLastMonthData(rawData[years[years.length - 1]]["PM2.5"]);
+            break;
         default:
+            console.warn("Unknown timeframe:", timeframe);
             data = rawData[years[years.length - 1]]["PM2.5"];
             break;
     }
@@ -205,6 +212,54 @@ async function loadAQIData(timeframe) {
         }
     }
     return results;
+}
+
+function getLastDayData(data) {
+    const lastEntriesByCountry = {};
+
+    Object.entries(data).forEach(([country, points]) => {
+        if (!lastEntriesByCountry[country]) {
+            lastEntriesByCountry[country] = {};
+        }
+
+        points.forEach(entry => {
+            const sp = entry.Samplingpoint;
+            if (sp) {
+                lastEntriesByCountry[country][sp] = entry;
+            }
+        });
+    });
+
+    const result = {};
+    Object.entries(lastEntriesByCountry).forEach(([country, spMap]) => {
+        result[country] = Object.values(spMap).slice(0, 24);
+    });
+
+    return result;
+}
+
+function getLastMonthData(data) {
+        const lastEntriesByCountry = {};
+
+    Object.entries(data).forEach(([country, points]) => {
+        if (!lastEntriesByCountry[country]) {
+            lastEntriesByCountry[country] = {};
+        }
+
+        points.forEach(entry => {
+            const sp = entry.Samplingpoint;
+            if (sp) {
+                lastEntriesByCountry[country][sp] = entry;
+            }
+        });
+    });
+
+    const result = {};
+    Object.entries(lastEntriesByCountry).forEach(([country, spMap]) => {
+        result[country] = Object.values(spMap).slice(0, 60);
+    });
+
+    return result;
 }
 
 async function loadEVData() {

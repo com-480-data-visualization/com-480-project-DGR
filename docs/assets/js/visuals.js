@@ -187,6 +187,7 @@ function toggleTheme() {
     const newTheme = currentTheme === "light" ? "dark" : "light";
     applyTheme('light');
 }
+
 function loadThemePreference() {
     let preferredTheme = localStorage.getItem("dashboardTheme");
     preferredTheme = 'light'
@@ -225,12 +226,6 @@ function positionTooltip(event, tooltipSelection) {
     }
 
     tooltipSelection.style("left", left + "px").style("top", top + "px");
-
-    // tooltipSelection.style("left", event.clientX + "px").style("top", event.clientY + "px");
-
-    console.log("Tooltip HTML:", tooltipSelection.html());
-    console.log("Tooltip position - Left:", tooltipSelection.style("left"));
-    console.log("Tooltip position - Top:", tooltipSelection.style("top"));
 }
 
 function handleMouseOver(event, d) {
@@ -1295,12 +1290,21 @@ function setupEVChartDimensions() {
 
 function animateLineEV(pathSelection) {
     if (!pathSelection || pathSelection.empty()) return;
+
     pathSelection.each(function() {
-        const pathNode = d3.select(this);
-        const totalLength = pathNode.node().getTotalLength();
-        pathNode.attr("stroke-dasharray", totalLength + " " + totalLength)
+        const path = d3.select(this);
+        const totalLength = this.getTotalLength();
+
+        // Preserve existing stroke-dasharray if already set
+        const originalDashArray = path.attr("stroke-dasharray");
+
+        path
+            .attr("stroke-dasharray", originalDashArray || totalLength + " " + totalLength)
             .attr("stroke-dashoffset", totalLength)
-            .transition("lineAnimEV").duration(1200).delay(150).ease(d3.easeSinInOut)
+            .transition("lineAnimEV")
+            .duration(1200)
+            .delay(150)
+            .ease(d3.easeSinInOut)
             .attr("stroke-dashoffset", 0);
     });
 }
@@ -1409,9 +1413,14 @@ async function drawEVAirQualityCorrelationChart(animate = true) {
             .attr("d", linePurchases);
         if(animate) animateLineEV(pathPurchases);
 
-        const pathPM25 = chartG_ev.append("path").datum(countryData.pm25).attr("class", `line-data ev-line ev-pm25-line series-${index}`)
-            .attr("fill", "none").attr("stroke", countryData.color).attr("stroke-width", 2.5)
-             .attr("stroke-dasharray", null)
+        const pathPM25 = chartG_ev
+            .append("path")
+            .datum(countryData.pm25)
+            .attr("class", `line-data ev-line ev-pm25-line series-${index}`)
+            .attr("fill", "none")
+            .attr("stroke", countryData.color)
+            .attr("stroke-width", 2.5)
+            .attr("stroke-dasharray", null)
             .attr("d", linePM25);
         if(animate) animateLineEV(pathPM25);
 
@@ -1451,10 +1460,19 @@ async function drawEVAirQualityCorrelationChart(animate = true) {
     });
 
     evChartLegendContainer.html('');
+
     plotData.forEach(countryData => {
-        const legendItem = evChartLegendContainer.append("div").attr("class", "legend-item");
-        legendItem.append("span").attr("class", "legend-color-box").style("background-color", countryData.color);
-        legendItem.append("span").text(countryData.name);
+        const legendPM25 = evChartLegendContainer.append("div").attr("class", "legend-item");
+        legendPM25.append("div")
+            .attr("class", "legend-line pm25-line")
+            .style("background-color", countryData.color);
+        legendPM25.append("span").text(`${countryData.name} – PM2.5`);
+
+        const legendEV = evChartLegendContainer.append("div").attr("class", "legend-item");
+        legendEV.append("div")
+            .attr("class", "legend-line ev-line")
+            .style("border-top", `3px dashed ${countryData.color}`);
+        legendEV.append("span").text(`${countryData.name} – EV Share`);
     });
 }
 
