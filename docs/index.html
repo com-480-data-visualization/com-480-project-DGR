@@ -26,8 +26,8 @@
 				<nav>
 					<ul>
 						<li><a href="#heatmap">Heatmap</a></li>
-						<li><a href="#trends">Trends</a></li>
 						<li><a href="#countries">Countries</a></li>
+						<li><a href="#trends">Trends</a></li>
 						<li><a href="#curiosities">Curiosities</a></li>
 						<li><a href="#footer">Team</a></li>
 					</ul>
@@ -119,75 +119,7 @@
 						<h2>Dive deeper into pollution at the country level</h2>
 					</header>
 				</div>
-				<a href="#trends" class="button style2 down anchored">Next</a>
-			</section>
-
-			<section id="trends" class="gray main style3">
-				<div class="content text-center">
-					<p> What's next? Now, let's zoom in even further.</p>
-					<p><strong>Want to know which pollutants are making the biggest impact?</strong> This section lets you focus on specific pollutants and shows you which countries are most affected.</p>
-					<p>You'll find a <strong>horizontal bar chart</strong> highlighting the top five countries with the <strong>highest average pollutant concentrations.</strong></p>
-					<p>Curious about the trends? A <strong>time-lapse animation</strong> lets you explore how these countries have evolved over the past decade.</p>
-					<p>Furthermore, a <strong>flashcard</strong> provides key insights about the selected pollutant: its name, acceptable concentration range, associated health risks, and emission sources.</p>
-					<p>This section takes raw data and transforms it into insights that matter—<strong>connecting pollution levels to real-world health impacts</strong> and making the information both actionable and eye-opening.</p>	
-
-					<div class="visuals-container" style="margin: 30px 0;">
-						<header>
-							<h1><i class="fas fa-smog" aria-hidden="true"></i> European Air Quality Trends</h1>
-							<div class="controls-container overview-controls-main"> 
-								<div class="control-group">
-									<label for="pollutant-select">Select Pollutant (Overview):</label>
-									<div class="select-wrapper">
-										<select id="pollutant-select" aria-label="Select pollutant type for overview charts"></select>
-										<svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 10l5 5 5-5z" />
-										</svg>
-									</div>
-								</div>
-							</div>
-						</header>
-				
-						<main id="overview-visualization">
-
-							<div id="visualization-area">
-								<div id="bar-chart-container">
-									<div id="chart-loader" class="chart-overlay" style="display: none;">
-										<i class="fas fa-spinner fa-spin"></i> Loading...
-									</div>
-									<div id="bar-chart" role="graphics-document" aria-label="Bar chart showing top 5 EU countries by pollutant concentration">
-									</div>
-								</div>
-								<div class="timelapse-controls">
-									<button id="play-pause-button" aria-label="Pause timelapse">
-										<i class="fas fa-pause" aria-hidden="true"></i>
-									</button>
-									<div class="year-selection-group">
-										<label for="year-slider" class="control-label sr-only">Select Year:</label>
-										<input type="range" id="year-slider" name="year-slider" min="2013" max="2024" step="1" value="2013" aria-labelledby="current-year-label">
-										<span id="current-year-label" class="control-label">Year: <span id="year-slider-value" aria-live="polite">2013</span></span>
-										<span id="current-year-display" class="sr-only" aria-live="polite">2013</span>
-									</div>
-								</div>
-							</div>
-							<div id="pollutant-info" class="flashcard" role="region" aria-live="polite">
-								<h2><i class="fas fa-info-circle" aria-hidden="true"></i> Pollutant Details</h2>
-								<p><span class="label"><i class="fas fa-tag" aria-hidden="true"></i> Name:</span> <span id="pollutant-name">N/A</span></p>
-								<p><span class="label"><i class="fas fa-ruler-combined" aria-hidden="true"></i> Guideline Limit (WHO):</span> <span id="acceptable-range">N/A</span></p>
-								<p><span class="label"><i class="fas fa-lungs-virus" aria-hidden="true"></i> Potential Health Impacts:</span> <span id="health-risks">N/A</span></p>
-								<p><span class="label"><i class="fas fa-industry" aria-hidden="true"></i> Main Emission Sources:</span> <span id="emission-sources">N/A</span></p>
-							</div>
-						</main>
-					</div>
-				</div>
-			</section>
-
-			<section id="intro" class="main style2 right dark fullscreen">
-					<div class="content box style2">
-						<header>
-							<h2>Pollutants at the Core</h2>
-							<h2>Unveiling the biggest pollutants and their impact</h2>
-						</header>
-					</div>
-					<a href="#countries" class="button style2 down anchored">Next</a>
+				<a href="#countries" class="button style2 down anchored">Next</a>
 			</section>
 
 			<section id="countries" class="gray main style3">
@@ -263,6 +195,74 @@
 							</div>
 						</main>		   
 					</div>					  
+				</div>
+			</section>
+
+			<section id="intro" class="main style2 right dark fullscreen">
+					<div class="content box style2">
+						<header>
+							<h2>Pollutants at the Core</h2>
+							<h2>Unveiling the biggest pollutants and their impact</h2>
+						</header>
+					</div>
+					<a href="#trends" class="button style2 down anchored">Next</a>
+			</section>
+
+			<section id="trends" class="gray main style3">
+				<div class="content text-center">
+					<p> What's next? Now, let's zoom in even further.</p>
+					<p><strong>Want to know which pollutants are making the biggest impact?</strong> This section lets you focus on specific pollutants and shows you which countries are most affected.</p>
+					<p>You'll find a <strong>horizontal bar chart</strong> highlighting the top five countries with the <strong>highest average pollutant concentrations.</strong></p>
+					<p>Curious about the trends? A <strong>time-lapse animation</strong> lets you explore how these countries have evolved over the past decade.</p>
+					<p>Furthermore, a <strong>flashcard</strong> provides key insights about the selected pollutant: its name, acceptable concentration range, associated health risks, and emission sources.</p>
+					<p>This section takes raw data and transforms it into insights that matter—<strong>connecting pollution levels to real-world health impacts</strong> and making the information both actionable and eye-opening.</p>	
+
+					<div class="visuals-container" style="margin: 30px 0;">
+						<header>
+							<h1><i class="fas fa-smog" aria-hidden="true"></i> European Air Quality Trends</h1>
+							<div class="controls-container overview-controls-main"> 
+								<div class="control-group">
+									<label for="pollutant-select">Select Pollutant (Overview):</label>
+									<div class="select-wrapper">
+										<select id="pollutant-select" aria-label="Select pollutant type for overview charts"></select>
+										<svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 10l5 5 5-5z" />
+										</svg>
+									</div>
+								</div>
+							</div>
+						</header>
+				
+						<main id="overview-visualization">
+
+							<div id="visualization-area">
+								<div id="bar-chart-container">
+									<div id="chart-loader" class="chart-overlay" style="display: none;">
+										<i class="fas fa-spinner fa-spin"></i> Loading...
+									</div>
+									<div id="bar-chart" role="graphics-document" aria-label="Bar chart showing top 5 EU countries by pollutant concentration">
+									</div>
+								</div>
+								<div class="timelapse-controls">
+									<button id="play-pause-button" aria-label="Pause timelapse">
+										<i class="fas fa-pause" aria-hidden="true"></i>
+									</button>
+									<div class="year-selection-group">
+										<label for="year-slider" class="control-label sr-only">Select Year:</label>
+										<input type="range" id="year-slider" name="year-slider" min="2013" max="2024" step="1" value="2013" aria-labelledby="current-year-label">
+										<span id="current-year-label" class="control-label">Year: <span id="year-slider-value" aria-live="polite">2013</span></span>
+										<span id="current-year-display" class="sr-only" aria-live="polite">2013</span>
+									</div>
+								</div>
+							</div>
+							<div id="pollutant-info" class="flashcard" role="region" aria-live="polite">
+								<h2><i class="fas fa-info-circle" aria-hidden="true"></i> Pollutant Details</h2>
+								<p><span class="label"><i class="fas fa-tag" aria-hidden="true"></i> Name:</span> <span id="pollutant-name">N/A</span></p>
+								<p><span class="label"><i class="fas fa-ruler-combined" aria-hidden="true"></i> Guideline Limit (WHO):</span> <span id="acceptable-range">N/A</span></p>
+								<p><span class="label"><i class="fas fa-lungs-virus" aria-hidden="true"></i> Potential Health Impacts:</span> <span id="health-risks">N/A</span></p>
+								<p><span class="label"><i class="fas fa-industry" aria-hidden="true"></i> Main Emission Sources:</span> <span id="emission-sources">N/A</span></p>
+							</div>
+						</main>
+					</div>
 				</div>
 			</section>
 
